@@ -10,33 +10,168 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedShellRouteImport } from './routes/_authenticated/_shell'
+import { Route as AuthenticatedBoasVindasRouteImport } from './routes/_authenticated/boas-vindas'
+import { Route as AuthenticatedShellBemEstarRouteImport } from './routes/_authenticated/_shell/bem-estar'
+import { Route as AuthenticatedShellCheckinRouteImport } from './routes/_authenticated/_shell/checkin'
+import { Route as AuthenticatedShellCuidadoRouteImport } from './routes/_authenticated/_shell/cuidado'
+import { Route as AuthenticatedShellDesafiosRouteImport } from './routes/_authenticated/_shell/desafios'
+import { Route as AuthenticatedShellInicioRouteImport } from './routes/_authenticated/_shell/inicio'
+import { Route as AuthenticatedShellPerfilRouteImport } from './routes/_authenticated/_shell/perfil'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedShellRoute = AuthenticatedShellRouteImport.update({
+  id: '/_shell',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedBoasVindasRoute = AuthenticatedBoasVindasRouteImport.update({
+  id: '/boas-vindas',
+  path: '/boas-vindas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedShellBemEstarRoute =
+  AuthenticatedShellBemEstarRouteImport.update({
+    id: '/bem-estar',
+    path: '/bem-estar',
+    getParentRoute: () => AuthenticatedShellRoute,
+  } as any)
+const AuthenticatedShellCheckinRoute =
+  AuthenticatedShellCheckinRouteImport.update({
+    id: '/checkin',
+    path: '/checkin',
+    getParentRoute: () => AuthenticatedShellRoute,
+  } as any)
+const AuthenticatedShellCuidadoRoute =
+  AuthenticatedShellCuidadoRouteImport.update({
+    id: '/cuidado',
+    path: '/cuidado',
+    getParentRoute: () => AuthenticatedShellRoute,
+  } as any)
+const AuthenticatedShellDesafiosRoute =
+  AuthenticatedShellDesafiosRouteImport.update({
+    id: '/desafios',
+    path: '/desafios',
+    getParentRoute: () => AuthenticatedShellRoute,
+  } as any)
+const AuthenticatedShellInicioRoute =
+  AuthenticatedShellInicioRouteImport.update({
+    id: '/inicio',
+    path: '/inicio',
+    getParentRoute: () => AuthenticatedShellRoute,
+  } as any)
+const AuthenticatedShellPerfilRoute =
+  AuthenticatedShellPerfilRouteImport.update({
+    id: '/perfil',
+    path: '/perfil',
+    getParentRoute: () => AuthenticatedShellRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/boas-vindas': typeof AuthenticatedBoasVindasRoute
+  '/bem-estar': typeof AuthenticatedShellBemEstarRoute
+  '/checkin': typeof AuthenticatedShellCheckinRoute
+  '/cuidado': typeof AuthenticatedShellCuidadoRoute
+  '/desafios': typeof AuthenticatedShellDesafiosRoute
+  '/inicio': typeof AuthenticatedShellInicioRoute
+  '/perfil': typeof AuthenticatedShellPerfilRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/boas-vindas': typeof AuthenticatedBoasVindasRoute
+  '/bem-estar': typeof AuthenticatedShellBemEstarRoute
+  '/checkin': typeof AuthenticatedShellCheckinRoute
+  '/cuidado': typeof AuthenticatedShellCuidadoRoute
+  '/desafios': typeof AuthenticatedShellDesafiosRoute
+  '/inicio': typeof AuthenticatedShellInicioRoute
+  '/perfil': typeof AuthenticatedShellPerfilRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/_shell': typeof AuthenticatedShellRouteWithChildren
+  '/_authenticated/boas-vindas': typeof AuthenticatedBoasVindasRoute
+  '/_authenticated/_shell/bem-estar': typeof AuthenticatedShellBemEstarRoute
+  '/_authenticated/_shell/checkin': typeof AuthenticatedShellCheckinRoute
+  '/_authenticated/_shell/cuidado': typeof AuthenticatedShellCuidadoRoute
+  '/_authenticated/_shell/desafios': typeof AuthenticatedShellDesafiosRoute
+  '/_authenticated/_shell/inicio': typeof AuthenticatedShellInicioRoute
+  '/_authenticated/_shell/perfil': typeof AuthenticatedShellPerfilRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/boas-vindas'
+    | '/bem-estar'
+    | '/checkin'
+    | '/cuidado'
+    | '/desafios'
+    | '/inicio'
+    | '/perfil'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/boas-vindas'
+    | '/bem-estar'
+    | '/checkin'
+    | '/cuidado'
+    | '/desafios'
+    | '/inicio'
+    | '/perfil'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/reset-password'
+    | '/_authenticated/_shell'
+    | '/_authenticated/boas-vindas'
+    | '/_authenticated/_shell/bem-estar'
+    | '/_authenticated/_shell/checkin'
+    | '/_authenticated/_shell/cuidado'
+    | '/_authenticated/_shell/desafios'
+    | '/_authenticated/_shell/inicio'
+    | '/_authenticated/_shell/perfil'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +183,125 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/_shell': {
+      id: '/_authenticated/_shell'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedShellRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/boas-vindas': {
+      id: '/_authenticated/boas-vindas'
+      path: '/boas-vindas'
+      fullPath: '/boas-vindas'
+      preLoaderRoute: typeof AuthenticatedBoasVindasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/_shell/bem-estar': {
+      id: '/_authenticated/_shell/bem-estar'
+      path: '/bem-estar'
+      fullPath: '/bem-estar'
+      preLoaderRoute: typeof AuthenticatedShellBemEstarRouteImport
+      parentRoute: typeof AuthenticatedShellRoute
+    }
+    '/_authenticated/_shell/checkin': {
+      id: '/_authenticated/_shell/checkin'
+      path: '/checkin'
+      fullPath: '/checkin'
+      preLoaderRoute: typeof AuthenticatedShellCheckinRouteImport
+      parentRoute: typeof AuthenticatedShellRoute
+    }
+    '/_authenticated/_shell/cuidado': {
+      id: '/_authenticated/_shell/cuidado'
+      path: '/cuidado'
+      fullPath: '/cuidado'
+      preLoaderRoute: typeof AuthenticatedShellCuidadoRouteImport
+      parentRoute: typeof AuthenticatedShellRoute
+    }
+    '/_authenticated/_shell/desafios': {
+      id: '/_authenticated/_shell/desafios'
+      path: '/desafios'
+      fullPath: '/desafios'
+      preLoaderRoute: typeof AuthenticatedShellDesafiosRouteImport
+      parentRoute: typeof AuthenticatedShellRoute
+    }
+    '/_authenticated/_shell/inicio': {
+      id: '/_authenticated/_shell/inicio'
+      path: '/inicio'
+      fullPath: '/inicio'
+      preLoaderRoute: typeof AuthenticatedShellInicioRouteImport
+      parentRoute: typeof AuthenticatedShellRoute
+    }
+    '/_authenticated/_shell/perfil': {
+      id: '/_authenticated/_shell/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof AuthenticatedShellPerfilRouteImport
+      parentRoute: typeof AuthenticatedShellRoute
+    }
   }
 }
 
+interface AuthenticatedShellRouteChildren {
+  AuthenticatedShellBemEstarRoute: typeof AuthenticatedShellBemEstarRoute
+  AuthenticatedShellCheckinRoute: typeof AuthenticatedShellCheckinRoute
+  AuthenticatedShellCuidadoRoute: typeof AuthenticatedShellCuidadoRoute
+  AuthenticatedShellDesafiosRoute: typeof AuthenticatedShellDesafiosRoute
+  AuthenticatedShellInicioRoute: typeof AuthenticatedShellInicioRoute
+  AuthenticatedShellPerfilRoute: typeof AuthenticatedShellPerfilRoute
+}
+
+const AuthenticatedShellRouteChildren: AuthenticatedShellRouteChildren = {
+  AuthenticatedShellBemEstarRoute: AuthenticatedShellBemEstarRoute,
+  AuthenticatedShellCheckinRoute: AuthenticatedShellCheckinRoute,
+  AuthenticatedShellCuidadoRoute: AuthenticatedShellCuidadoRoute,
+  AuthenticatedShellDesafiosRoute: AuthenticatedShellDesafiosRoute,
+  AuthenticatedShellInicioRoute: AuthenticatedShellInicioRoute,
+  AuthenticatedShellPerfilRoute: AuthenticatedShellPerfilRoute,
+}
+
+const AuthenticatedShellRouteWithChildren =
+  AuthenticatedShellRoute._addFileChildren(AuthenticatedShellRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedShellRoute: typeof AuthenticatedShellRouteWithChildren
+  AuthenticatedBoasVindasRoute: typeof AuthenticatedBoasVindasRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedShellRoute: AuthenticatedShellRouteWithChildren,
+  AuthenticatedBoasVindasRoute: AuthenticatedBoasVindasRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
