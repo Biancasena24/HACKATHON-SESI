@@ -8,6 +8,13 @@
       "when": 1794506880707,
       "tag": "0000_viva_core_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794667925708,
+      "tag": "0001_teams_support_dependents",
+      "breakpoints": true
     }
   ]
 }

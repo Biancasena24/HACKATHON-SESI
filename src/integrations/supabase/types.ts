@@ -77,6 +77,33 @@ export type Database = {
         }
         Relationships: []
       }
+      dependents: {
+        Row: {
+          birth_year: number
+          created_at: string
+          id: string
+          name: string
+          relation: string
+          user_id: string
+        }
+        Insert: {
+          birth_year: number
+          created_at?: string
+          id?: string
+          name: string
+          relation?: string
+          user_id?: string
+        }
+        Update: {
+          birth_year?: number
+          created_at?: string
+          id?: string
+          name?: string
+          relation?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -85,6 +112,8 @@ export type Database = {
           health_answers: Json
           id: string
           onboarding_completed: boolean
+          region: string
+          simple_mode: boolean
           updated_at: string
           work_mode: string
         }
@@ -95,6 +124,8 @@ export type Database = {
           health_answers?: Json
           id: string
           onboarding_completed?: boolean
+          region?: string
+          simple_mode?: boolean
           updated_at?: string
           work_mode?: string
         }
@@ -105,8 +136,87 @@ export type Database = {
           health_answers?: Json
           id?: string
           onboarding_completed?: boolean
+          region?: string
+          simple_mode?: boolean
           updated_at?: string
           work_mode?: string
+        }
+        Relationships: []
+      }
+      support_contacts: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          relation: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          relation?: string | null
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          relation?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      team_members: {
+        Row: {
+          display_name: string | null
+          joined_at: string
+          team_id: string
+          user_id: string
+        }
+        Insert: {
+          display_name?: string | null
+          joined_at?: string
+          team_id: string
+          user_id: string
+        }
+        Update: {
+          display_name?: string | null
+          joined_at?: string
+          team_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          code: string
+          created_at: string
+          created_by: string
+          id: string
+          name: string
+        }
+        Insert: {
+          code?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          name?: string
         }
         Relationships: []
       }
@@ -136,7 +246,20 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_team_member: {
+        Args: { _team: string; _user: string }
+        Returns: boolean
+      }
+      join_team: { Args: { _code: string }; Returns: string }
+      team_ranking: {
+        Args: never
+        Returns: {
+          members: number
+          name: string
+          score: number
+          team_id: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

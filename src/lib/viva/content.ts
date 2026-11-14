@@ -30,6 +30,7 @@ export const BODY_AREAS: { id: string; label: string; nudge: string }[] = [
   { id: "ombros", label: "Ombros", nudge: "Gire os ombros para trás 10 vezes, bem devagar." },
   { id: "costas", label: "Lombar", nudge: "Levante a cada hora e caminhe um pouco. Se a dor continuar, procure sua UBS." },
   { id: "maos", label: "Punhos e mãos", nudge: "Abra e feche as mãos e gire os punhos por 30 segundos." },
+  { id: "boca", label: "Dentes e gengiva", nudge: "Dor ou sangramento na gengiva merece atenção: a equipe de Saúde Bucal da UBS pode avaliar." },
   { id: "pernas", label: "Pernas e pés", nudge: "Se ficou muito tempo em pé, eleve as pernas por alguns minutos no descanso." },
 ];
 

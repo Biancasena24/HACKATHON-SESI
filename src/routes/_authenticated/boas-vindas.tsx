@@ -29,7 +29,7 @@ export const Route = createFileRoute("/_authenticated/boas-vindas")({
   component: Onboarding,
 });
 
-const FOCUS: FocusArea[] = ["movimento", "sono", "mente", "hidratacao", "alimentacao", "prevencao"];
+const FOCUS: FocusArea[] = ["movimento", "sono", "mente", "hidratacao", "alimentacao", "prevencao", "boca"];
 
 function OptionCard({ selected, onClick, title, hint }: { selected: boolean; onClick: () => void; title: string; hint?: string }) {
   return (

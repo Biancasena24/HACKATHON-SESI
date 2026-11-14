@@ -1,5 +1,5 @@
 export type WorkMode = "home_office" | "operacional" | "noturno" | "retorno";
-export type FocusArea = "movimento" | "sono" | "mente" | "hidratacao" | "alimentacao" | "prevencao";
+export type FocusArea = "movimento" | "sono" | "mente" | "hidratacao" | "alimentacao" | "prevencao" | "boca";
 
 export interface Challenge {
   id: string;
@@ -89,6 +89,30 @@ export const CHALLENGES: Challenge[] = [
     cadence: "daily",
   },
   {
+    id: "escovar-almoco",
+    title: "Escovar os dentes após o almoço",
+    short: "Deixe uma escova e creme dental no trabalho.",
+    why: "Escovar depois das refeições previne cárie e problemas na gengiva.",
+    area: "boca",
+    cadence: "daily",
+  },
+  {
+    id: "fio-dental",
+    title: "Usar fio dental",
+    short: "Uma vez por dia, de preferência à noite.",
+    why: "O fio limpa onde a escova não alcança.",
+    area: "boca",
+    cadence: "daily",
+  },
+  {
+    id: "dentista-ubs",
+    title: "Consulta com a Saúde Bucal da UBS",
+    short: "Pergunte na sua UBS como agendar com a equipe de dentistas.",
+    why: "Uma consulta por ano ajuda a evitar dor e tratamentos maiores.",
+    area: "boca",
+    cadence: "once",
+  },
+  {
     id: "exames",
     title: "Agendar um cuidado preventivo",
     short: "Procure sua UBS para atualizar vacinas ou exames de rotina.",
@@ -105,6 +129,7 @@ export const AREA_LABEL: Record<FocusArea, string> = {
   hidratacao: "Hidratação",
   alimentacao: "Alimentação",
   prevencao: "Prevenção",
+  boca: "Saúde bucal",
 };
 
 export const WORK_MODES: { id: WorkMode; label: string; hint: string }[] = [

@@ -78,3 +78,11 @@ export const COLLECTIVE_NEEDS = [
   { label: "Estresse e sobrecarga", share: 31 },
   { label: "Vacinação em atraso", share: 18 },
 ];
+
+/** Fictitious PGR (Programa de Gerenciamento de Riscos) data crossed with anonymous trends. */
+export const PGR_CROSS = [
+  { sector: "Produção — turno A", risk: "Ruído acima de 85 dB", trend: "28% relatam dor de cabeça", action: "Revisar protetores auriculares e pausas em área silenciosa." },
+  { sector: "Logística", risk: "Levantamento de carga", trend: "38% relatam dor lombar", action: "Análise ergonômica e rodízio de tarefas." },
+  { sector: "Desenvolvimento", risk: "Iluminação inadequada", trend: "46% relatam fadiga visual", action: "Ajustar iluminação e reforçar pausas de tela." },
+  { sector: "Produção — turno noturno", risk: "Trabalho noturno contínuo", trend: "52% relatam sono ruim", action: "Rever escalas e folgas." },
+];
