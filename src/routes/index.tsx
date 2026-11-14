@@ -22,7 +22,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PublicHeader } from "@/components/viva/PublicHeader";
-import { RiskBadge } from "@/components/viva/RiskBadge";
 import { healthProfile } from "@/lib/viva/mockData";
 
 export const Route = createFileRoute("/")({
@@ -204,7 +203,6 @@ function Landing() {
                         </p>
                       </div>
                     </div>
-                    <RiskBadge risk={healthProfile.riskClassification} size="sm" />
                   </div>
 
                   <div className="mt-4 rounded-[1.5rem] bg-gradient-blue p-4 text-white shadow-blue">

@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/dialog";
 import { ChallengeRow } from "@/components/viva/ChallengeRow";
 import { CommunityMiniCard } from "@/components/viva/Communities";
-import { RiskBadge } from "@/components/viva/RiskBadge";
 import { WellbeingChart } from "@/components/viva/WellbeingChart";
 import { CareSupportCard } from "@/components/viva/CareSupportCard";
 import { ensureJourney, useJourney, useToggleChallengeLog } from "@/hooks/use-journey";
@@ -88,9 +87,6 @@ function Dashboard() {
           <h1 className="text-3xl font-extrabold text-primary md:text-4xl">
             {j.profile?.display_name || "você"}
           </h1>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <RiskBadge risk={healthProfile.riskClassification} size="sm" />
         </div>
       </section>
 

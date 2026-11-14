@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, PiggyBank, ShieldCheck, Sparkles, Stethoscope } from "lucide-react";
+import { ArrowRight, PiggyBank, Sparkles, Stethoscope } from "lucide-react";
 import { ApsConsultationsSection } from "@/components/viva/ApsConsultationsSection";
-import { RiskStatusCard } from "@/components/viva/RiskBadge";
 import { StealthPanel } from "@/components/viva/StealthPanel";
 import { healthProfile } from "@/lib/viva/mockData";
 
@@ -11,11 +10,10 @@ export const Route = createFileRoute("/_authenticated/_shell/minha-saude")({
       { title: "Minha saúde — Cuidaê+" },
       {
         name: "description",
-        content:
-          "Sua classificação de risco, histórico de consultas com APS e monitoramento preventivo.",
+        content: "Histórico de consultas com APS e monitoramento preventivo.",
       },
       { property: "og:title", content: "Minha saúde — Cuidaê+" },
-      { property: "og:description", content: "Risco, histórico APS e cuidados preventivos." },
+      { property: "og:description", content: "Histórico APS e cuidados preventivos." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -24,7 +22,6 @@ export const Route = createFileRoute("/_authenticated/_shell/minha-saude")({
 });
 
 const SECTIONS = [
-  { href: "#risco", label: "Meu risco", icon: ShieldCheck },
   { href: "#consultas", label: "Histórico APS", icon: Stethoscope },
   { href: "#monitoramento", label: "Monitoramento", icon: Sparkles },
 ];
@@ -39,8 +36,7 @@ function MyHealth() {
           </p>
           <h1 className="text-3xl font-extrabold text-primary md:text-4xl">Minha saúde</h1>
           <p className="mt-1 max-w-2xl text-muted-foreground">
-            Acompanhe seus atendimentos na Atenção Primária (APS), classificação de risco e o
-            monitoramento preventivo.
+            Acompanhe seus atendimentos na Atenção Primária (APS) e o monitoramento preventivo.
           </p>
         </div>
         <nav aria-label="Atalhos desta página" className="flex flex-wrap gap-2">
@@ -74,13 +70,6 @@ function MyHealth() {
           </p>
         </div>
       </header>
-
-      <div id="risco" className="scroll-mt-24">
-        <RiskStatusCard
-          risk={healthProfile.riskClassification}
-          nextReturn={healthProfile.nextReturn}
-        />
-      </div>
 
       <div id="consultas" className="scroll-mt-24">
         <ApsConsultationsSection />

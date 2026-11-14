@@ -162,7 +162,7 @@ function ProfilePage() {
             </span>
             <span>
               <span className="block font-bold text-primary">Minha saúde</span>
-              <span className="block text-xs text-muted-foreground">Risco e consultas APS</span>
+              <span className="block text-xs text-muted-foreground">Consultas e acompanhamento APS</span>
             </span>
           </Link>
           <Link
