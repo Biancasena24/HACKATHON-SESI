@@ -17,7 +17,7 @@ export function Breathing({ onComplete }: { onComplete?: () => void }) {
 
   useEffect(() => {
     if (!running) return;
-    const t = setTimeout(() => setPhase((p) => (p + 1) % PHASES.length), PHASES[phase].seconds * 1000);
+    const t = setTimeout(() => setPhase((p) => (p + 1) % PHASES.length), (PHASES[phase]?.seconds ?? 4) * 1000);
     return () => clearTimeout(t);
   }, [running, phase]);
 
@@ -35,7 +35,7 @@ export function Breathing({ onComplete }: { onComplete?: () => void }) {
     }
   }, [elapsed, onComplete]);
 
-  const current = PHASES[phase];
+  const current = PHASES[phase] ?? PHASES[0];
   const remaining = Math.max(0, TOTAL_SECONDS - elapsed);
 
   return (

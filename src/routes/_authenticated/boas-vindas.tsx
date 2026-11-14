@@ -83,7 +83,7 @@ function Onboarding() {
     });
     if (error) {
       setBusy(false);
-      return toast.error("Não conseguimos salvar. Tente de novo.");
+      { toast.error("Não conseguimos salvar. Tente de novo."); return; }
     }
     const picks = suggestChallenges(focus, mode, 3);
     await supabase.from("user_challenges").upsert(

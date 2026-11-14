@@ -73,7 +73,7 @@ function CheckinPage() {
       { onConflict: "user_id,day" },
     );
     setBusy(false);
-    if (error) return toast.error("Não conseguimos salvar. Tente de novo.");
+    if (error) { toast.error("Não conseguimos salvar. Tente de novo."); return; }
     await qc.invalidateQueries({ queryKey: ["checkins", j.user.id] });
     if (!existing) toast.success(`+${POINTS.checkin} pontos de cuidado`);
     setSaved(true);

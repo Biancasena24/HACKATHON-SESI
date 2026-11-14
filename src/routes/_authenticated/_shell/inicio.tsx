@@ -39,7 +39,7 @@ function Dashboard() {
   const toggle = useToggleChallengeLog();
   const mode = (j.profile?.work_mode ?? "home_office") as WorkMode;
   const tips = MODE_TIPS[mode] ?? MODE_TIPS.home_office;
-  const tip = tips[new Date().getDate() % tips.length];
+  const tip = tips[new Date().getDate() % tips.length] ?? { title: "", text: "" };
   const recs = recommendationsFor((j.profile?.health_answers ?? {}) as HealthAnswers);
   const myChallenges = j.myChallengeIds.map(getChallenge).filter((c): c is NonNullable<typeof c> => !!c);
   const doneCount = myChallenges.filter((c) => j.doneToday.has(c.id)).length;

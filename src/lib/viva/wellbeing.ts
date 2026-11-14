@@ -9,7 +9,7 @@ export const CARE_WINDOW_DAYS = 5;
 export const CARE_MIN_HARD_DAYS = 3;
 
 function shiftDay(day: string, delta: number): string {
-  const [y, m, d] = day.split("-").map(Number);
+  const [y = 1970, m = 1, d = 1] = day.split("-").map(Number);
   return new Date(Date.UTC(y, m - 1, d + delta)).toISOString().slice(0, 10);
 }
 

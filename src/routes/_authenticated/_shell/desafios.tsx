@@ -34,7 +34,7 @@ function Challenges() {
   const last7 = Array.from({ length: 7 }, (_, i) => daysAgoStr(6 - i));
   const mine = CHALLENGES.filter((c) => j.myChallengeIds.includes(c.id));
   const others = CHALLENGES.filter((c) => !j.myChallengeIds.includes(c.id) && (!c.modes || c.modes.includes(mode)));
-  const weekDone = j.logs.filter((l) => l.day >= last7[0]).length;
+  const weekDone = j.logs.filter((l) => l.day >= (last7[0] ?? "")).length;
   const weekTarget = Math.max(mine.length * 5, 1);
   const goalPct = Math.round((CAMPAIGN.collectiveGoal.current / CAMPAIGN.collectiveGoal.target) * 100);
 

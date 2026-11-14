@@ -12,7 +12,7 @@ export function levelFor(points: number) {
 }
 
 function shiftDay(day: string, delta: number): string {
-  const [y, m, d] = day.split("-").map(Number);
+  const [y = 1970, m = 1, d = 1] = day.split("-").map(Number);
   const dt = new Date(Date.UTC(y, m - 1, d + delta));
   return dt.toISOString().slice(0, 10);
 }

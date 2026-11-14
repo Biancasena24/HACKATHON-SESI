@@ -42,7 +42,7 @@ function ProfilePage() {
     setBusy(true);
     const { error } = await supabase.from("profiles").update({ display_name: name.trim().slice(0, 60), work_mode: mode }).eq("id", j.user.id);
     setBusy(false);
-    if (error) return toast.error("Não foi possível salvar.");
+    if (error) { toast.error("Não foi possível salvar."); return; }
     await qc.invalidateQueries({ queryKey: ["profile", j.user.id] });
     toast.success("Perfil atualizado");
   }
@@ -50,7 +50,7 @@ function ProfilePage() {
   async function wipe() {
     const a = await supabase.from("checkins").delete().eq("user_id", j.user.id);
     const b = await supabase.from("challenge_logs").delete().eq("user_id", j.user.id);
-    if (a.error || b.error) return toast.error("Não foi possível apagar agora.");
+    if (a.error || b.error) { toast.error("Não foi possível apagar agora."); return; }
     await qc.invalidateQueries();
     toast.success("Seus registros foram apagados.");
   }

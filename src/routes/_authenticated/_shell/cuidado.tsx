@@ -59,7 +59,7 @@ function Care() {
   async function lookup(e: FormEvent) {
     e.preventDefault();
     const digits = cep.replace(/\D/g, "");
-    if (digits.length !== 8) return toast.error("Digite um CEP com 8 números.");
+    if (digits.length !== 8) { toast.error("Digite um CEP com 8 números."); return; }
     setLoading(true);
     try {
       const res = await fetch(`https://viacep.com.br/ws/${digits}/json/`);
@@ -75,7 +75,7 @@ function Care() {
   }
 
   function nearMe() {
-    if (!navigator.geolocation) return toast.error("Seu aparelho não permite localização.");
+    if (!navigator.geolocation) { toast.error("Seu aparelho não permite localização."); return; }
     navigator.geolocation.getCurrentPosition(
       (pos) => window.open(`https://www.google.com/maps/search/UBS/@${pos.coords.latitude},${pos.coords.longitude},15z`, "_blank", "noreferrer"),
       () => toast.error("Não foi possível usar sua localização. Tente pelo CEP."),

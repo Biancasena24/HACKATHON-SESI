@@ -10,12 +10,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/viva/Logo";
 
-type AuthSearch = { mode?: "login" | "signup"; redirect?: string };
+type AuthSearch = { mode?: "login" | "signup" | undefined; redirect?: string | undefined };
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (s: Record<string, unknown>): AuthSearch => ({
-    mode: s.mode === "signup" ? "signup" : s.mode === "login" ? "login" : undefined,
-    redirect: typeof s.redirect === "string" ? s.redirect : undefined,
+    mode: s["mode"] === "signup" ? "signup" : s["mode"] === "login" ? "login" : undefined,
+    redirect: typeof s["redirect"] === "string" ? s["redirect"] : undefined,
   }),
   head: () => ({
     meta: [
@@ -78,19 +78,19 @@ function AuthPage() {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     const em = emailSchema.safeParse(email);
-    if (!em.success) return toast.error(em.error.issues[0].message);
+    if (!em.success) { toast.error(em.error.issues[0]?.message ?? "Dados inválidos"); return; }
     if (mode === "forgot") {
       setBusy(true);
       const { error } = await supabase.auth.resetPasswordForEmail(em.data, {
         redirectTo: `${window.location.origin}/reset-password`,
       });
       setBusy(false);
-      if (error) return toast.error("Não foi possível enviar agora. Tente de novo.");
+      if (error) { toast.error("Não foi possível enviar agora. Tente de novo."); return; }
       setSentTo(em.data);
       return;
     }
     const pw = passwordSchema.safeParse(password);
-    if (!pw.success) return toast.error(pw.error.issues[0].message);
+    if (!pw.success) { toast.error(pw.error.issues[0]?.message ?? "Dados inválidos"); return; }
     setBusy(true);
     if (mode === "signup") {
       const { data, error } = await supabase.auth.signUp({
@@ -102,7 +102,7 @@ function AuthPage() {
         },
       });
       setBusy(false);
-      if (error) return toast.error(error.message.includes("registered") ? "Este e-mail já tem conta. Tente entrar." : "Não foi possível criar a conta.");
+      if (error) { toast.error(error.message.includes("registered") ? "Este e-mail já tem conta. Tente entrar." : "Não foi possível criar a conta."); return; }
       if (!data.session) setSentTo(em.data);
       return;
     }
