@@ -6,6 +6,7 @@ import {
   LayoutGrid,
   ShieldCheck,
   Smile,
+  Sparkles,
   Stethoscope,
   Trophy,
   UserRound,
@@ -34,35 +35,24 @@ export const Route = createFileRoute("/_authenticated/_shell")({
 
 const BOTTOM_NAV = [
   { to: "/inicio", label: "Início", icon: Home, center: false },
-  { to: "/comunidades", label: "Comunidade", icon: Users, center: false },
-  { to: "/checkin", label: "Check-in", icon: Smile, center: true },
-  { to: "/desafios", label: "Desafios", icon: Trophy, center: false },
+  { to: "/minha-saude", label: "Minha saúde", icon: ShieldCheck, center: false },
+  { to: "/engajamento", label: "Engajamento", icon: Sparkles, center: true },
+  { to: "/cuidado", label: "APS", icon: Stethoscope, center: false },
 ] as const;
 
 const MORE_NAV = [
   {
-    to: "/minha-saude",
-    label: "Minha saúde",
-    icon: ShieldCheck,
-    tone: "bg-indigo-soft text-primary",
+    to: "/perfil",
+    label: "Meu perfil",
+    icon: UserRound,
+    tone: "bg-pink-soft text-brick",
   },
-  {
-    to: "/bem-estar",
-    label: "Bem-estar",
-    icon: HeartPulse,
-    tone: "bg-mint-soft text-secondary-foreground",
-  },
-  { to: "/cuidado", label: "APS", icon: Stethoscope, tone: "bg-peach text-brick" },
-  { to: "/perfil", label: "Meu perfil", icon: UserRound, tone: "bg-pink-soft text-brick" },
 ] as const;
 
 const DESKTOP_NAV = [
   { to: "/inicio", label: "Início" },
-  { to: "/checkin", label: "Check-in" },
-  { to: "/desafios", label: "Desafios" },
-  { to: "/comunidades", label: "Comunidade" },
+  { to: "/engajamento", label: "Engajamento" },
   { to: "/minha-saude", label: "Minha saúde" },
-  { to: "/bem-estar", label: "Bem-estar" },
   { to: "/cuidado", label: "APS" },
 ] as const;
 

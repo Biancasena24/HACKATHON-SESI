@@ -19,7 +19,7 @@ export function CareSupportCard() {
               <Link to="/cuidado">Buscar acolhimento na UBS</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link to="/bem-estar">Respirar agora</Link>
+              <Link to="/cuidado">Canais de apoio</Link>
             </Button>
           </div>
         </div>

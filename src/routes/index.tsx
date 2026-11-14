@@ -27,16 +27,16 @@ import { healthProfile } from "@/lib/viva/mockData";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VIVA+ — pequenos cuidados, grandes conquistas" },
+      { title: "Cuidaê+ — pequenos cuidados, grandes conquistas" },
       {
         name: "description",
         content:
-          "Plataforma de autocuidado que conecta trabalhadores, empresas e a Atenção Primária do SUS: check-in rápido, comunidades, relatórios de poupança em saúde e monitoramento preventivo.",
+          "Plataforma de autocuidado que conecta trabalhadores, empresas e a Atenção Primária à Saúde: check-in rápido, comunidades, relatórios de economia preventiva e monitoramento.",
       },
-      { property: "og:title", content: "VIVA+ — pequenos cuidados, grandes conquistas" },
+      { property: "og:title", content: "Cuidaê+ — pequenos cuidados, grandes conquistas" },
       {
         property: "og:description",
-        content: "Prevenção que vira rotina, conectada à Atenção Primária do SUS.",
+        content: "Prevenção que vira rotina, conectada à Atenção Primária à Saúde.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -153,8 +153,8 @@ function Landing() {
                 <span className="text-gradient">grandes conquistas.</span>
               </h1>
               <p className="mt-5 max-w-xl text-lg text-muted-foreground">
-                O VIVA+ transforma prevenção em rotina leve: check-ins rápidos, metas em grupo,
-                relatórios de poupança em saúde e uma ponte direta com a sua UBS.
+                O Cuidaê+ transforma prevenção em rotina leve: check-ins rápidos, metas em grupo,
+                economia com prevenção e uma ponte direta com a sua UBS.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button asChild variant="hero" size="xl">
@@ -373,7 +373,7 @@ function Landing() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-wider text-blue">
-                Diferenciais VIVA+
+                Diferenciais Cuidaê+
               </p>
               <h2 className="mt-2 text-3xl font-extrabold text-primary md:text-4xl">
                 Tecnologia que parece cuidado, não cobrança
@@ -381,7 +381,7 @@ function Landing() {
             </div>
             <Button asChild variant="outline" size="lg">
               <Link to="/auth" search={{ mode: "signup" }}>
-                Explorar o VIVA+ <ArrowRight />
+                Explorar o Cuidaê+ <ArrowRight />
               </Link>
             </Button>
           </div>
@@ -431,7 +431,7 @@ function Landing() {
                   {[
                     "Dados individuais nunca chegam ao empregador",
                     "Grupos com menos de 10 pessoas ficam ocultos",
-                    "O VIVA+ não substitui profissionais de saúde",
+                    "O Cuidaê+ não substitui profissionais de saúde",
                     "Você pode apagar seus registros quando quiser",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">
@@ -459,7 +459,7 @@ function Landing() {
       </main>
       <footer className="border-t border-border/60 bg-white/40 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:justify-between">
-          <span>VIVA+ · protótipo de demonstração</span>
+          <span>Cuidaê+ · protótipo de demonstração</span>
           <span>Em emergência, ligue 192 (SAMU). Precisa conversar? CVV 188.</span>
         </div>
       </footer>

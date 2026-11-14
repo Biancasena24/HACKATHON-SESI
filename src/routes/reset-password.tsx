@@ -10,9 +10,9 @@ import { Logo } from "@/components/viva/Logo";
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: "Nova senha — VIVA+" },
-      { name: "description", content: "Defina uma nova senha para sua conta VIVA+." },
-      { property: "og:title", content: "Nova senha — VIVA+" },
+      { title: "Nova senha — Cuidaê+" },
+      { name: "description", content: "Defina uma nova senha para sua conta Cuidaê+." },
+      { property: "og:title", content: "Nova senha — Cuidaê+" },
       { property: "og:description", content: "Defina uma nova senha para sua conta." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

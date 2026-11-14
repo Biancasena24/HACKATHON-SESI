@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/empresa")({
   head: () => ({
     meta: [
-      { title: "Painel da empresa (demonstração) — VIVA+" },
+      { title: "Painel da empresa (demonstração) — Cuidaê+" },
       { name: "description", content: "Indicadores coletivos e anônimos de participação, adesão a desafios e bem-estar, cruzados com riscos do ambiente de trabalho." },
-      { property: "og:title", content: "Painel da empresa — VIVA+" },
+      { property: "og:title", content: "Painel da empresa — Cuidaê+" },
       { property: "og:description", content: "Dados agregados e anônimos para ambientes de trabalho mais saudáveis." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

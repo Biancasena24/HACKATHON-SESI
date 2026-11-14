@@ -21,6 +21,7 @@ import { Route as AuthenticatedShellCheckinRouteImport } from './routes/_authent
 import { Route as AuthenticatedShellComunidadesRouteImport } from './routes/_authenticated/_shell/comunidades'
 import { Route as AuthenticatedShellCuidadoRouteImport } from './routes/_authenticated/_shell/cuidado'
 import { Route as AuthenticatedShellDesafiosRouteImport } from './routes/_authenticated/_shell/desafios'
+import { Route as AuthenticatedShellEngajamentoRouteImport } from './routes/_authenticated/_shell/engajamento'
 import { Route as AuthenticatedShellInicioRouteImport } from './routes/_authenticated/_shell/inicio'
 import { Route as AuthenticatedShellMinhaSaudeRouteImport } from './routes/_authenticated/_shell/minha-saude'
 import { Route as AuthenticatedShellPerfilRouteImport } from './routes/_authenticated/_shell/perfil'
@@ -88,6 +89,12 @@ const AuthenticatedShellDesafiosRoute =
     path: '/desafios',
     getParentRoute: () => AuthenticatedShellRoute,
   } as any)
+const AuthenticatedShellEngajamentoRoute =
+  AuthenticatedShellEngajamentoRouteImport.update({
+    id: '/engajamento',
+    path: '/engajamento',
+    getParentRoute: () => AuthenticatedShellRoute,
+  } as any)
 const AuthenticatedShellInicioRoute =
   AuthenticatedShellInicioRouteImport.update({
     id: '/inicio',
@@ -118,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/comunidades': typeof AuthenticatedShellComunidadesRoute
   '/cuidado': typeof AuthenticatedShellCuidadoRoute
   '/desafios': typeof AuthenticatedShellDesafiosRoute
+  '/engajamento': typeof AuthenticatedShellEngajamentoRoute
   '/inicio': typeof AuthenticatedShellInicioRoute
   '/minha-saude': typeof AuthenticatedShellMinhaSaudeRoute
   '/perfil': typeof AuthenticatedShellPerfilRoute
@@ -133,6 +141,7 @@ export interface FileRoutesByTo {
   '/comunidades': typeof AuthenticatedShellComunidadesRoute
   '/cuidado': typeof AuthenticatedShellCuidadoRoute
   '/desafios': typeof AuthenticatedShellDesafiosRoute
+  '/engajamento': typeof AuthenticatedShellEngajamentoRoute
   '/inicio': typeof AuthenticatedShellInicioRoute
   '/minha-saude': typeof AuthenticatedShellMinhaSaudeRoute
   '/perfil': typeof AuthenticatedShellPerfilRoute
@@ -151,6 +160,7 @@ export interface FileRoutesById {
   '/_authenticated/_shell/comunidades': typeof AuthenticatedShellComunidadesRoute
   '/_authenticated/_shell/cuidado': typeof AuthenticatedShellCuidadoRoute
   '/_authenticated/_shell/desafios': typeof AuthenticatedShellDesafiosRoute
+  '/_authenticated/_shell/engajamento': typeof AuthenticatedShellEngajamentoRoute
   '/_authenticated/_shell/inicio': typeof AuthenticatedShellInicioRoute
   '/_authenticated/_shell/minha-saude': typeof AuthenticatedShellMinhaSaudeRoute
   '/_authenticated/_shell/perfil': typeof AuthenticatedShellPerfilRoute
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/comunidades'
     | '/cuidado'
     | '/desafios'
+    | '/engajamento'
     | '/inicio'
     | '/minha-saude'
     | '/perfil'
@@ -183,6 +194,7 @@ export interface FileRouteTypes {
     | '/comunidades'
     | '/cuidado'
     | '/desafios'
+    | '/engajamento'
     | '/inicio'
     | '/minha-saude'
     | '/perfil'
@@ -200,6 +212,7 @@ export interface FileRouteTypes {
     | '/_authenticated/_shell/comunidades'
     | '/_authenticated/_shell/cuidado'
     | '/_authenticated/_shell/desafios'
+    | '/_authenticated/_shell/engajamento'
     | '/_authenticated/_shell/inicio'
     | '/_authenticated/_shell/minha-saude'
     | '/_authenticated/_shell/perfil'
@@ -299,6 +312,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedShellDesafiosRouteImport
       parentRoute: typeof AuthenticatedShellRoute
     }
+    '/_authenticated/_shell/engajamento': {
+      id: '/_authenticated/_shell/engajamento'
+      path: '/engajamento'
+      fullPath: '/engajamento'
+      preLoaderRoute: typeof AuthenticatedShellEngajamentoRouteImport
+      parentRoute: typeof AuthenticatedShellRoute
+    }
     '/_authenticated/_shell/inicio': {
       id: '/_authenticated/_shell/inicio'
       path: '/inicio'
@@ -329,6 +349,7 @@ interface AuthenticatedShellRouteChildren {
   AuthenticatedShellComunidadesRoute: typeof AuthenticatedShellComunidadesRoute
   AuthenticatedShellCuidadoRoute: typeof AuthenticatedShellCuidadoRoute
   AuthenticatedShellDesafiosRoute: typeof AuthenticatedShellDesafiosRoute
+  AuthenticatedShellEngajamentoRoute: typeof AuthenticatedShellEngajamentoRoute
   AuthenticatedShellInicioRoute: typeof AuthenticatedShellInicioRoute
   AuthenticatedShellMinhaSaudeRoute: typeof AuthenticatedShellMinhaSaudeRoute
   AuthenticatedShellPerfilRoute: typeof AuthenticatedShellPerfilRoute
@@ -340,6 +361,7 @@ const AuthenticatedShellRouteChildren: AuthenticatedShellRouteChildren = {
   AuthenticatedShellComunidadesRoute: AuthenticatedShellComunidadesRoute,
   AuthenticatedShellCuidadoRoute: AuthenticatedShellCuidadoRoute,
   AuthenticatedShellDesafiosRoute: AuthenticatedShellDesafiosRoute,
+  AuthenticatedShellEngajamentoRoute: AuthenticatedShellEngajamentoRoute,
   AuthenticatedShellInicioRoute: AuthenticatedShellInicioRoute,
   AuthenticatedShellMinhaSaudeRoute: AuthenticatedShellMinhaSaudeRoute,
   AuthenticatedShellPerfilRoute: AuthenticatedShellPerfilRoute,

@@ -166,7 +166,8 @@ function ProfilePage() {
             </span>
           </Link>
           <Link
-            to="/comunidades"
+            to="/engajamento"
+            search={{ tab: "comunidade" }}
             className="flex min-h-16 items-center gap-3 rounded-2xl border-2 border-border p-3 transition-colors hover:border-primary/40 hover:bg-secondary"
           >
             <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-sun-soft text-accent-foreground">

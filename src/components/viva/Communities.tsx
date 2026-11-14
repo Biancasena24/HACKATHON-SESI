@@ -32,7 +32,8 @@ export function CommunityMiniCard({ gamification }: { gamification: Gamification
 
   return (
     <Link
-      to="/comunidades"
+      to="/engajamento"
+      search={{ tab: "comunidade" }}
       className="group flex flex-col rounded-[2rem] bg-mint-soft p-5 transition-transform hover:-translate-y-1"
     >
       <div className="flex items-start justify-between gap-3">
@@ -98,7 +99,8 @@ export function CommunitiesPanel({ gamification }: { gamification: Gamification 
             check-in e cada desafio concluído soma pontos para o seu grupo.
           </p>
           <Link
-            to="/checkin"
+            to="/engajamento"
+            search={{ tab: "checkin" }}
             className="mt-5 inline-flex h-14 items-center justify-center gap-2 rounded-2xl bg-gradient-blue px-6 text-base font-bold text-white shadow-blue transition-transform hover:-translate-y-0.5"
           >
             Somar pontos hoje <ArrowRight className="size-5" aria-hidden />

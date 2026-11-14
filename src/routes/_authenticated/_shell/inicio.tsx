@@ -82,7 +82,9 @@ function Dashboard() {
   const checkinMap = new Map<string, (typeof mockCheckins)[number]>();
   for (const m of mockCheckins) checkinMap.set(m.day, m);
   for (const c of j.checkins) checkinMap.set(c.day, c);
-  const displayCheckins = Array.from(checkinMap.values()).sort((a, b) => a.day.localeCompare(b.day));
+  const displayCheckins = Array.from(checkinMap.values()).sort((a, b) =>
+    a.day.localeCompare(b.day),
+  );
 
   return (
     <div className="space-y-6 md:space-y-8">
@@ -102,15 +104,7 @@ function Dashboard() {
           <PiggyBank className="size-5" aria-hidden />
         </span>
         <p className="text-sm font-semibold leading-relaxed">
-          Você economiza até{" "}
-          <strong className="font-extrabold text-primary">
-            R${" "}
-            {healthProfile.insights.savingsValue?.toLocaleString("pt-BR", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            }) ?? "1.240,00"}
-          </strong>{" "}
-          por se cuidar — sabia que um exame como colonoscopia pode custar até{" "}
+          Você economiza por se cuidar — sabia que um exame como colonoscopia pode custar até{" "}
           <strong className="font-extrabold text-primary">R$ 2.800,00</strong> se a prevenção for
           deixada de lado?
         </p>
@@ -161,77 +155,6 @@ function Dashboard() {
         <ArrowRight className="ml-auto size-5 shrink-0 text-primary" aria-hidden />
       </Link>
 
-      {/* Botão Desafios de hoje (abre popup, com botão embaixo) */}
-      <Dialog open={challengesOpen} onOpenChange={setChallengesOpen}>
-        <DialogTrigger asChild>
-          <button
-            type="button"
-            className="card-surface group flex w-full cursor-pointer flex-col gap-4 p-5 text-left transition-all hover:scale-[1.01] hover:border-primary/40 hover:shadow-lift md:p-6"
-          >
-            <div className="flex items-center gap-4">
-              <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-sky-soft text-primary shadow-soft transition-transform group-hover:scale-105">
-                <Trophy className="size-7" aria-hidden />
-              </span>
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-extrabold text-primary">Desafios de hoje</h2>
-                  <span className="rounded-full bg-mint-soft px-2.5 py-0.5 text-xs font-bold text-secondary-foreground">
-                    {doneCount} de {myChallenges.length} concluídos
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Toque para abrir e registrar seus cuidados
-                </p>
-              </div>
-            </div>
-            <div className="w-full pt-1">
-              <span className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3 text-sm font-bold text-white shadow-soft transition-all group-hover:bg-primary/90">
-                Ver desafios <ArrowRight className="size-4" />
-              </span>
-            </div>
-          </button>
-        </DialogTrigger>
-        <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-extrabold text-primary">
-              Desafios de hoje
-            </DialogTitle>
-            <DialogDescription>
-              {doneCount} de {myChallenges.length} concluídos hoje. Marque os que já realizou.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="mt-3 space-y-3">
-            {myChallenges.length === 0 ? (
-              <p className="rounded-2xl bg-muted p-4 text-center text-muted-foreground">
-                Você ainda não escolheu desafios para acompanhar.
-              </p>
-            ) : (
-              myChallenges.map((c) => (
-                <ChallengeRow
-                  key={c.id}
-                  challenge={c}
-                  done={j.doneToday.has(c.id)}
-                  disabled={toggle.isPending}
-                  onToggle={() =>
-                    toggle.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })
-                  }
-                />
-              ))
-            )}
-          </div>
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t pt-4">
-            <Button asChild variant="ghost" size="sm" onClick={() => setChallengesOpen(false)}>
-              <Link to="/desafios">
-                Ver catálogo completo <ArrowRight className="ml-1 size-4" />
-              </Link>
-            </Button>
-            <Button variant="outline" size="sm" onClick={() => setChallengesOpen(false)}>
-              Fechar
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-
       {/* Dicas e Campanha */}
       <div className="grid gap-6 md:grid-cols-2">
         {nudges.length > 0 && (
@@ -271,43 +194,107 @@ function Dashboard() {
         </section>
       </div>
 
-      {/* Card compacto de Check-in posicionado lá embaixo */}
-      {j.todayCheckin ? (
-        <section className="card-surface flex items-center justify-between gap-3 p-4">
-          <div className="flex items-center gap-3">
-            <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-mint-soft text-success shadow-soft">
-              <CheckCircle2 className="size-5" />
-            </span>
-            <div>
-              <p className="text-sm font-bold text-primary">Check-in de hoje feito</p>
-              <p className="text-xs text-muted-foreground">
-                Sono: {SLEEP_LABEL[j.todayCheckin.sleep] ?? "Ok"} · Pressão:{" "}
-                {STRESS_LABEL[j.todayCheckin.stress] ?? "Ok"}
-              </p>
+      {/* Ações rápidas de hoje: Check-in e Desafios (juntos e discretos) */}
+      <section className="grid gap-3 sm:grid-cols-2" aria-label="Ações de hoje">
+        {/* Card discreto de Check-in */}
+        {j.todayCheckin ? (
+          <div className="card-surface flex items-center justify-between gap-3 p-3.5">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-mint-soft text-success">
+                <CheckCircle2 className="size-4" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-primary truncate">Check-in de hoje feito</p>
+                <p className="text-[11px] text-muted-foreground truncate">
+                  Sono: {SLEEP_LABEL[j.todayCheckin.sleep] ?? "Ok"} · Pressão:{" "}
+                  {STRESS_LABEL[j.todayCheckin.stress] ?? "Ok"}
+                </p>
+              </div>
             </div>
+            <Button asChild variant="outline" size="sm" className="h-8 px-2.5 text-xs bg-card shrink-0">
+              <Link to="/engajamento" search={{ tab: "checkin" }}>Editar</Link>
+            </Button>
           </div>
-          <Button asChild variant="outline" size="sm" className="bg-card">
-            <Link to="/checkin">Editar</Link>
-          </Button>
-        </section>
-      ) : (
-        <section className="card-surface flex items-center justify-between gap-3 p-4">
-          <div className="flex items-center gap-3">
-            <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-sky-soft text-primary shadow-soft">
-              <Smile className="size-5" />
-            </span>
-            <div>
-              <p className="text-sm font-bold text-primary">Check-in diário</p>
-              <p className="text-xs text-muted-foreground">Como estão seu sono e estresse hoje?</p>
+        ) : (
+          <div className="card-surface flex items-center justify-between gap-3 p-3.5">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-sky-soft text-primary">
+                <Smile className="size-4" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-primary truncate">Check-in diário</p>
+                <p className="text-[11px] text-muted-foreground truncate">Como estão sono e estresse?</p>
+              </div>
             </div>
+            <Button asChild variant="hero" size="sm" className="h-8 px-2.5 text-xs shrink-0">
+              <Link to="/engajamento" search={{ tab: "checkin" }}>
+                Fazer <ArrowRight className="ml-1 size-3" />
+              </Link>
+            </Button>
           </div>
-          <Button asChild variant="hero" size="sm" className="shrink-0">
-            <Link to="/checkin">
-              Fazer check-in <ArrowRight className="ml-1 size-3.5" />
-            </Link>
-          </Button>
-        </section>
-      )}
+        )}
+
+        {/* Card discreto de Desafios */}
+        <Dialog open={challengesOpen} onOpenChange={setChallengesOpen}>
+          <div className="card-surface flex items-center justify-between gap-3 p-3.5">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-sun-soft text-accent-foreground">
+                <Trophy className="size-4" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-primary truncate">Desafios de hoje</p>
+                <p className="text-[11px] text-muted-foreground truncate">
+                  {doneCount} de {myChallenges.length} concluídos
+                </p>
+              </div>
+            </div>
+            <DialogTrigger asChild>
+              <Button variant="outline" size="sm" className="h-8 px-2.5 text-xs shrink-0 bg-card">
+                Ver desafios <ArrowRight className="ml-1 size-3" />
+              </Button>
+            </DialogTrigger>
+          </div>
+          <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-extrabold text-primary">
+                Desafios de hoje
+              </DialogTitle>
+              <DialogDescription>
+                {doneCount} de {myChallenges.length} concluídos hoje. Marque os que já realizou.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="mt-3 space-y-3">
+              {myChallenges.length === 0 ? (
+                <p className="rounded-2xl bg-muted p-4 text-center text-muted-foreground">
+                  Você ainda não escolheu desafios para acompanhar.
+                </p>
+              ) : (
+                myChallenges.map((c) => (
+                  <ChallengeRow
+                    key={c.id}
+                    challenge={c}
+                    done={j.doneToday.has(c.id)}
+                    disabled={toggle.isPending}
+                    onToggle={() =>
+                      toggle.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })
+                    }
+                  />
+                ))
+              )}
+            </div>
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t pt-4">
+              <Button asChild variant="ghost" size="sm" onClick={() => setChallengesOpen(false)}>
+                <Link to="/engajamento" search={{ tab: "desafios" }}>
+                  Ver catálogo completo <ArrowRight className="ml-1 size-4" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => setChallengesOpen(false)}>
+                Fechar
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </section>
 
       {/* Gráfico de evolução */}
       <section className="card-surface p-5 md:p-6">
@@ -342,9 +329,7 @@ function Dashboard() {
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {recs.map((r) => (
             <li key={r.title} className="rounded-2xl bg-muted p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-primary/70">
-                {r.area}
-              </p>
+              <p className="text-xs font-bold uppercase tracking-wider text-primary/70">{r.area}</p>
               <p className="font-bold text-primary">{r.title}</p>
               <p className="text-sm text-muted-foreground">{r.text}</p>
             </li>

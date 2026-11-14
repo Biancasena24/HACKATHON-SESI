@@ -11,6 +11,8 @@ import {
   Smartphone,
   Syringe,
   BellRing,
+  Phone,
+  AlertCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,6 +22,7 @@ import {
   useToggleChallengeLog,
   useToggleJoin,
 } from "@/hooks/use-journey";
+import { SUPPORT_CHANNELS } from "@/lib/viva/content";
 
 export const Route = createFileRoute("/_authenticated/_shell/cuidado")({
   loader: ({ context }) => ensureJourney(context.queryClient, context.user.id),
@@ -386,6 +389,58 @@ function Care() {
           </Button>
         </section>
       </div>
+
+      {/* Onde buscar acolhimento */}
+      <section className="rounded-3xl bg-ink p-6 text-ink-foreground">
+        <h2 className="text-xl font-bold">Onde buscar acolhimento</h2>
+        <p className="mt-1 opacity-80">
+          Você não precisa passar por isso sozinho(a). Estes canais são gratuitos.
+        </p>
+        <ul className="mt-4 grid gap-3 md:grid-cols-3">
+          {SUPPORT_CHANNELS.map((s) => (
+            <li
+              key={s.name}
+              className="rounded-2xl bg-ink-foreground/8 p-4 ring-1 ring-ink-foreground/15"
+            >
+              <p className="font-bold">{s.name}</p>
+              <p className="mt-1 text-sm opacity-80">{s.detail}</p>
+              <div className="mt-3 flex flex-wrap gap-2 text-sm font-semibold">
+                {s.phone && (
+                  <a
+                    href={`tel:${s.phone}`}
+                    className="inline-flex items-center gap-1 rounded-full bg-sun px-3 py-1.5 text-sun-foreground"
+                  >
+                    <Phone className="size-4" /> Ligar {s.phone}
+                  </a>
+                )}
+                {s.href?.startsWith("http") && (
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 ring-1 ring-ink-foreground/30"
+                  >
+                    Abrir site <ExternalLink className="size-4" />
+                  </a>
+                )}
+                {s.href === "/cuidado" && (
+                  <button
+                    type="button"
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    className="inline-flex items-center gap-1 rounded-full bg-sun px-3 py-1.5 text-sun-foreground"
+                  >
+                    Buscar minha UBS acima
+                  </button>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-4 flex items-start gap-2 text-sm opacity-80">
+          <AlertCircle className="mt-0.5 size-4 shrink-0" /> O Cuidaê+ não faz diagnósticos e não
+          substitui atendimento profissional.
+        </p>
+      </section>
     </div>
   );
 }
