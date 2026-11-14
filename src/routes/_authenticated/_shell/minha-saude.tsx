@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, HeartHandshake, ShieldCheck, Sparkles, Stethoscope } from "lucide-react";
+import { ArrowRight, HeartHandshake, PiggyBank, ShieldCheck, Sparkles, Stethoscope } from "lucide-react";
 import { ApsConsultationsSection } from "@/components/viva/ApsConsultationsSection";
 import { DependentsSection } from "@/components/viva/DependentsSection";
 import { RiskStatusCard } from "@/components/viva/RiskBadge";
@@ -57,6 +57,24 @@ function MyHealth() {
             </a>
           ))}
         </nav>
+
+        {/* Linha de aviso de poupança preventiva */}
+        <div className="flex items-center gap-3 rounded-2xl border border-mint/40 bg-mint-soft/80 px-4 py-3 text-secondary-foreground shadow-xs">
+          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
+            <PiggyBank className="size-5" aria-hidden />
+          </span>
+          <p className="text-sm font-semibold">
+            Você já economizou{" "}
+            <strong className="font-extrabold text-primary">
+              R${" "}
+              {healthProfile.insights.savingsValue?.toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }) ?? "1.240,00"}
+            </strong>{" "}
+            por se cuidar preventivamente.
+          </p>
+        </div>
       </header>
 
       <div id="risco" className="scroll-mt-24">

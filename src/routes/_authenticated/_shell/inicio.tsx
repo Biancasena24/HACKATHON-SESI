@@ -2,11 +2,11 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  Award,
   CheckCircle2,
   Eye,
   HeartHandshake,
   Megaphone,
+  PiggyBank,
   Smile,
   Sparkles,
   Stethoscope,
@@ -81,7 +81,6 @@ function Dashboard() {
     .filter((c): c is NonNullable<typeof c> => !!c);
   const doneCount = myChallenges.filter((c) => j.doneToday.has(c.id)).length;
   const nudges = BODY_AREAS.filter((b) => j.todayCheckin?.body_areas.includes(b.id));
-  const unlocked = j.achievements.filter((a) => a.unlocked);
   const goalPct = Math.round(
     (CAMPAIGN.collectiveGoal.current / CAMPAIGN.collectiveGoal.target) * 100,
   );
@@ -145,6 +144,24 @@ function Dashboard() {
           </div>
         </section>
       )}
+
+      {/* Linha de aviso de poupança preventiva */}
+      <div className="flex items-center gap-3 rounded-2xl border border-mint/40 bg-mint-soft/80 px-4 py-3 text-secondary-foreground shadow-xs">
+        <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
+          <PiggyBank className="size-5" aria-hidden />
+        </span>
+        <p className="text-sm font-semibold">
+          Você já economizou{" "}
+          <strong className="font-extrabold text-primary">
+            R${" "}
+            {healthProfile.insights.savingsValue?.toLocaleString("pt-BR", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }) ?? "1.240,00"}
+          </strong>{" "}
+          por se cuidar preventivamente.
+        </p>
+      </div>
 
       {j.careSupport && <CareSupportCard />}
 
@@ -214,12 +231,12 @@ function Dashboard() {
         <ArrowRight className="ml-auto size-5 shrink-0 text-primary" aria-hidden />
       </Link>
 
-      {/* Botão de desafios do dia (abre popup sem poluir a tela inicial) */}
+      {/* Botão de desafios do dia (abre popup sem poluir a tela inicial, com botão embaixo) */}
       <Dialog open={challengesOpen} onOpenChange={setChallengesOpen}>
         <DialogTrigger asChild>
           <button
             type="button"
-            className="card-surface flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left transition-all hover:scale-[1.01] hover:border-primary/40 hover:shadow-lift md:p-6 group"
+            className="card-surface group flex w-full cursor-pointer flex-col gap-4 p-5 text-left transition-all hover:scale-[1.01] hover:border-primary/40 hover:shadow-lift md:p-6"
           >
             <div className="flex items-center gap-4">
               <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-sky-soft text-primary shadow-soft transition-transform group-hover:scale-105">
@@ -237,9 +254,11 @@ function Dashboard() {
                 </p>
               </div>
             </div>
-            <span className="inline-flex shrink-0 items-center gap-2 rounded-2xl bg-primary px-4 py-2.5 text-sm font-bold text-white shadow-soft transition-transform group-hover:translate-x-1">
-              Ver desafios <ArrowRight className="size-4" />
-            </span>
+            <div className="w-full pt-1">
+              <span className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-3 text-sm font-bold text-white shadow-soft transition-all group-hover:bg-primary/90">
+                Ver desafios <ArrowRight className="size-4" />
+              </span>
+            </div>
           </button>
         </DialogTrigger>
         <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
@@ -263,7 +282,9 @@ function Dashboard() {
                   challenge={c}
                   done={j.doneToday.has(c.id)}
                   disabled={toggle.isPending}
-                  onToggle={() => toggle.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })}
+                  onToggle={() =>
+                    toggle.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })
+                  }
                 />
               ))
             )}
@@ -351,51 +372,21 @@ function Dashboard() {
         )}
       </section>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <section className="card-surface p-5 md:p-6">
-          <h2 className="text-xl font-extrabold text-primary">Recomendações para você</h2>
-          <ul className="mt-3 space-y-3">
-            {recs.map((r) => (
-              <li key={r.title} className="rounded-2xl bg-muted p-4">
-                <p className="text-xs font-bold uppercase tracking-wider text-primary/70">
-                  {r.area}
-                </p>
-                <p className="font-bold text-primary">{r.title}</p>
-                <p className="text-sm text-muted-foreground">{r.text}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-        <section className="card-surface p-5 md:p-6">
-          <h2 className="text-xl font-extrabold text-primary">Conquistas</h2>
-          <p className="text-sm text-muted-foreground">
-            {unlocked.length} de {j.achievements.length} desbloqueadas
-          </p>
-          <ul className="mt-3 grid grid-cols-2 gap-3">
-            {j.achievements.map((a) => (
-              <li
-                key={a.id}
-                className={cn(
-                  "rounded-2xl p-3",
-                  a.unlocked
-                    ? "bg-mint-soft"
-                    : "border border-dashed border-border bg-muted/40 opacity-70",
-                )}
-              >
-                <Award
-                  className={cn(
-                    "size-6",
-                    a.unlocked ? "text-secondary-foreground" : "text-muted-foreground",
-                  )}
-                  aria-hidden
-                />
-                <p className="mt-1 text-sm font-bold text-primary">{a.title}</p>
-                <p className="text-xs text-muted-foreground">{a.description}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
+      {/* Recomendações (conquistas removidas da tela inicial conforme solicitado) */}
+      <section className="card-surface p-5 md:p-6">
+        <h2 className="text-xl font-extrabold text-primary">Recomendações para você</h2>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {recs.map((r) => (
+            <li key={r.title} className="rounded-2xl bg-muted p-4">
+              <p className="text-xs font-bold uppercase tracking-wider text-primary/70">
+                {r.area}
+              </p>
+              <p className="font-bold text-primary">{r.title}</p>
+              <p className="text-sm text-muted-foreground">{r.text}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
