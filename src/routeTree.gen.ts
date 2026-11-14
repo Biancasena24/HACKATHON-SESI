@@ -18,9 +18,11 @@ import { Route as AuthenticatedShellRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedBoasVindasRouteImport } from './routes/_authenticated/boas-vindas'
 import { Route as AuthenticatedShellBemEstarRouteImport } from './routes/_authenticated/_shell/bem-estar'
 import { Route as AuthenticatedShellCheckinRouteImport } from './routes/_authenticated/_shell/checkin'
+import { Route as AuthenticatedShellComunidadesRouteImport } from './routes/_authenticated/_shell/comunidades'
 import { Route as AuthenticatedShellCuidadoRouteImport } from './routes/_authenticated/_shell/cuidado'
 import { Route as AuthenticatedShellDesafiosRouteImport } from './routes/_authenticated/_shell/desafios'
 import { Route as AuthenticatedShellInicioRouteImport } from './routes/_authenticated/_shell/inicio'
+import { Route as AuthenticatedShellMinhaSaudeRouteImport } from './routes/_authenticated/_shell/minha-saude'
 import { Route as AuthenticatedShellPerfilRouteImport } from './routes/_authenticated/_shell/perfil'
 
 const IndexRoute = IndexRouteImport.update({
@@ -68,6 +70,12 @@ const AuthenticatedShellCheckinRoute =
     path: '/checkin',
     getParentRoute: () => AuthenticatedShellRoute,
   } as any)
+const AuthenticatedShellComunidadesRoute =
+  AuthenticatedShellComunidadesRouteImport.update({
+    id: '/comunidades',
+    path: '/comunidades',
+    getParentRoute: () => AuthenticatedShellRoute,
+  } as any)
 const AuthenticatedShellCuidadoRoute =
   AuthenticatedShellCuidadoRouteImport.update({
     id: '/cuidado',
@@ -86,6 +94,12 @@ const AuthenticatedShellInicioRoute =
     path: '/inicio',
     getParentRoute: () => AuthenticatedShellRoute,
   } as any)
+const AuthenticatedShellMinhaSaudeRoute =
+  AuthenticatedShellMinhaSaudeRouteImport.update({
+    id: '/minha-saude',
+    path: '/minha-saude',
+    getParentRoute: () => AuthenticatedShellRoute,
+  } as any)
 const AuthenticatedShellPerfilRoute =
   AuthenticatedShellPerfilRouteImport.update({
     id: '/perfil',
@@ -101,9 +115,11 @@ export interface FileRoutesByFullPath {
   '/boas-vindas': typeof AuthenticatedBoasVindasRoute
   '/bem-estar': typeof AuthenticatedShellBemEstarRoute
   '/checkin': typeof AuthenticatedShellCheckinRoute
+  '/comunidades': typeof AuthenticatedShellComunidadesRoute
   '/cuidado': typeof AuthenticatedShellCuidadoRoute
   '/desafios': typeof AuthenticatedShellDesafiosRoute
   '/inicio': typeof AuthenticatedShellInicioRoute
+  '/minha-saude': typeof AuthenticatedShellMinhaSaudeRoute
   '/perfil': typeof AuthenticatedShellPerfilRoute
 }
 export interface FileRoutesByTo {
@@ -114,9 +130,11 @@ export interface FileRoutesByTo {
   '/boas-vindas': typeof AuthenticatedBoasVindasRoute
   '/bem-estar': typeof AuthenticatedShellBemEstarRoute
   '/checkin': typeof AuthenticatedShellCheckinRoute
+  '/comunidades': typeof AuthenticatedShellComunidadesRoute
   '/cuidado': typeof AuthenticatedShellCuidadoRoute
   '/desafios': typeof AuthenticatedShellDesafiosRoute
   '/inicio': typeof AuthenticatedShellInicioRoute
+  '/minha-saude': typeof AuthenticatedShellMinhaSaudeRoute
   '/perfil': typeof AuthenticatedShellPerfilRoute
 }
 export interface FileRoutesById {
@@ -130,9 +148,11 @@ export interface FileRoutesById {
   '/_authenticated/boas-vindas': typeof AuthenticatedBoasVindasRoute
   '/_authenticated/_shell/bem-estar': typeof AuthenticatedShellBemEstarRoute
   '/_authenticated/_shell/checkin': typeof AuthenticatedShellCheckinRoute
+  '/_authenticated/_shell/comunidades': typeof AuthenticatedShellComunidadesRoute
   '/_authenticated/_shell/cuidado': typeof AuthenticatedShellCuidadoRoute
   '/_authenticated/_shell/desafios': typeof AuthenticatedShellDesafiosRoute
   '/_authenticated/_shell/inicio': typeof AuthenticatedShellInicioRoute
+  '/_authenticated/_shell/minha-saude': typeof AuthenticatedShellMinhaSaudeRoute
   '/_authenticated/_shell/perfil': typeof AuthenticatedShellPerfilRoute
 }
 export interface FileRouteTypes {
@@ -145,9 +165,11 @@ export interface FileRouteTypes {
     | '/boas-vindas'
     | '/bem-estar'
     | '/checkin'
+    | '/comunidades'
     | '/cuidado'
     | '/desafios'
     | '/inicio'
+    | '/minha-saude'
     | '/perfil'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -158,9 +180,11 @@ export interface FileRouteTypes {
     | '/boas-vindas'
     | '/bem-estar'
     | '/checkin'
+    | '/comunidades'
     | '/cuidado'
     | '/desafios'
     | '/inicio'
+    | '/minha-saude'
     | '/perfil'
   id:
     | '__root__'
@@ -173,9 +197,11 @@ export interface FileRouteTypes {
     | '/_authenticated/boas-vindas'
     | '/_authenticated/_shell/bem-estar'
     | '/_authenticated/_shell/checkin'
+    | '/_authenticated/_shell/comunidades'
     | '/_authenticated/_shell/cuidado'
     | '/_authenticated/_shell/desafios'
     | '/_authenticated/_shell/inicio'
+    | '/_authenticated/_shell/minha-saude'
     | '/_authenticated/_shell/perfil'
   fileRoutesById: FileRoutesById
 }
@@ -252,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedShellCheckinRouteImport
       parentRoute: typeof AuthenticatedShellRoute
     }
+    '/_authenticated/_shell/comunidades': {
+      id: '/_authenticated/_shell/comunidades'
+      path: '/comunidades'
+      fullPath: '/comunidades'
+      preLoaderRoute: typeof AuthenticatedShellComunidadesRouteImport
+      parentRoute: typeof AuthenticatedShellRoute
+    }
     '/_authenticated/_shell/cuidado': {
       id: '/_authenticated/_shell/cuidado'
       path: '/cuidado'
@@ -273,6 +306,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedShellInicioRouteImport
       parentRoute: typeof AuthenticatedShellRoute
     }
+    '/_authenticated/_shell/minha-saude': {
+      id: '/_authenticated/_shell/minha-saude'
+      path: '/minha-saude'
+      fullPath: '/minha-saude'
+      preLoaderRoute: typeof AuthenticatedShellMinhaSaudeRouteImport
+      parentRoute: typeof AuthenticatedShellRoute
+    }
     '/_authenticated/_shell/perfil': {
       id: '/_authenticated/_shell/perfil'
       path: '/perfil'
@@ -286,18 +326,22 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedShellRouteChildren {
   AuthenticatedShellBemEstarRoute: typeof AuthenticatedShellBemEstarRoute
   AuthenticatedShellCheckinRoute: typeof AuthenticatedShellCheckinRoute
+  AuthenticatedShellComunidadesRoute: typeof AuthenticatedShellComunidadesRoute
   AuthenticatedShellCuidadoRoute: typeof AuthenticatedShellCuidadoRoute
   AuthenticatedShellDesafiosRoute: typeof AuthenticatedShellDesafiosRoute
   AuthenticatedShellInicioRoute: typeof AuthenticatedShellInicioRoute
+  AuthenticatedShellMinhaSaudeRoute: typeof AuthenticatedShellMinhaSaudeRoute
   AuthenticatedShellPerfilRoute: typeof AuthenticatedShellPerfilRoute
 }
 
 const AuthenticatedShellRouteChildren: AuthenticatedShellRouteChildren = {
   AuthenticatedShellBemEstarRoute: AuthenticatedShellBemEstarRoute,
   AuthenticatedShellCheckinRoute: AuthenticatedShellCheckinRoute,
+  AuthenticatedShellComunidadesRoute: AuthenticatedShellComunidadesRoute,
   AuthenticatedShellCuidadoRoute: AuthenticatedShellCuidadoRoute,
   AuthenticatedShellDesafiosRoute: AuthenticatedShellDesafiosRoute,
   AuthenticatedShellInicioRoute: AuthenticatedShellInicioRoute,
+  AuthenticatedShellMinhaSaudeRoute: AuthenticatedShellMinhaSaudeRoute,
   AuthenticatedShellPerfilRoute: AuthenticatedShellPerfilRoute,
 }
 

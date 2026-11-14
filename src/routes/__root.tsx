@@ -85,8 +85,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "VIVA+ — autocuidado no trabalho, conectado ao SUS" },
-      { name: "description", content: "VIVA+ transforma pequenos cuidados diários em hábito, conectando trabalhadores, empresas e a Atenção Primária à Saúde." },
-      { name: "theme-color", content: "#123C69" },
+      {
+        name: "description",
+        content:
+          "VIVA+ transforma pequenos cuidados diários em hábito, conectando trabalhadores, empresas e a Atenção Primária à Saúde.",
+      },
+      { name: "theme-color", content: "#323581" },
       { property: "og:title", content: "VIVA+ — autocuidado no trabalho" },
       { property: "og:description", content: "Pequenos cuidados, todo dia. Do trabalho ao SUS." },
       { property: "og:type", content: "website" },
@@ -102,7 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap",
       },
     ],
   }),
