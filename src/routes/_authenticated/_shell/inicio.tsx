@@ -223,7 +223,9 @@ function Dashboard() {
                   challenge={c}
                   done={j.doneToday.has(c.id)}
                   disabled={toggle.isPending}
-                  onToggle={() => toggle.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })}
+                  onToggle={() =>
+                    toggle.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })
+                  }
                 />
               ))
             )}
@@ -357,7 +359,9 @@ function Dashboard() {
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {recs.map((r) => (
             <li key={r.title} className="rounded-2xl bg-muted p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-primary/70">{r.area}</p>
+              <p className="text-xs font-bold uppercase tracking-wider text-primary/70">
+                {r.area}
+              </p>
               <p className="font-bold text-primary">{r.title}</p>
               <p className="text-sm text-muted-foreground">{r.text}</p>
             </li>
