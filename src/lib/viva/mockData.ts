@@ -53,6 +53,78 @@ export const healthProfile: HealthProfile = {
   ],
 };
 
+export interface ApsConsultation {
+  id: string;
+  type: "medica" | "enfermagem" | "odontologia" | "multiprofissional";
+  title: string;
+  date: string;
+  unit: string;
+  team: string;
+  professional: string;
+  summary: string;
+  conduct: string;
+  status: "Realizado" | "Agendado";
+}
+
+export const apsConsultations: ApsConsultation[] = [
+  {
+    id: "aps-1",
+    type: "medica",
+    title: "Consulta Médica de Família",
+    date: "14/08/2026",
+    unit: "UBS Jardim Esperança",
+    team: "Equipe Saúde da Família 02 (ESF 02)",
+    professional: "Dra. Camila Rocha · Médica de Família",
+    summary:
+      "Avaliação de rotina e acompanhamento de saúde do trabalhador. PA 120/80 mmHg, glicemia em jejum de 88 mg/dL. Exames preventivos dentro dos parâmetros de normalidade.",
+    conduct:
+      "Manter atividade física regular e pausas ativas. Retorno preventivo recomendado em 6 meses.",
+    status: "Realizado",
+  },
+  {
+    id: "aps-2",
+    type: "enfermagem",
+    title: "Consulta de Enfermagem e Imunização",
+    date: "22/05/2026",
+    unit: "UBS Jardim Esperança",
+    team: "Equipe Saúde da Família 02 (ESF 02)",
+    professional: "Enf. Marcos Lima · Enfermeiro de Família",
+    summary:
+      "Acolhimento preventivo e atualização da caderneta vacinal do adulto. Avaliação de hábitos de sono, alimentação e hidratação na rotina.",
+    conduct:
+      "Administrada dose da vacina Influenza e reforço de dT. Carteira de vacinas 100% em dia.",
+    status: "Realizado",
+  },
+  {
+    id: "aps-3",
+    type: "odontologia",
+    title: "Consulta Odontológica Preventiva",
+    date: "10/02/2026",
+    unit: "UBS Jardim Esperança",
+    team: "Equipe de Saúde Bucal (ESB 01)",
+    professional: "Dr. Lucas Mendes · Cirurgião-Dentista APS",
+    summary:
+      "Exame clínico bucal completo, gengivas saudáveis e ausência de cáries ativas. Profilaxia preventiva e aplicação tópica de flúor.",
+    conduct:
+      "Reforçadas orientações de escovação pós-refeição e fio dental diário. Agendamento de revisão preventiva semestral.",
+    status: "Realizado",
+  },
+  {
+    id: "aps-4",
+    type: "multiprofissional",
+    title: "Avaliação Postural e Ergonômica (eMulti)",
+    date: "18/11/2025",
+    unit: "UBS Jardim Esperança",
+    team: "Equipe Multiprofissional (eMulti)",
+    professional: "Juliana Prado · Fisioterapeuta da APS",
+    summary:
+      "Avaliação de queixas osteomusculares leves em região cervical e ombros. Análise da rotina de esforço repetitivo no trabalho.",
+    conduct:
+      "Prescrição de série de micro-pausas e exercícios de descompressão muscular. Participação no grupo de bem-estar corporal da UBS.",
+    status: "Realizado",
+  },
+];
+
 export interface CommunityGroup {
   id: string;
   name: string;

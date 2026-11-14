@@ -162,7 +162,7 @@ function ProfilePage() {
             </span>
             <span>
               <span className="block font-bold text-primary">Minha saúde</span>
-              <span className="block text-xs text-muted-foreground">Risco, poupança e família</span>
+              <span className="block text-xs text-muted-foreground">Risco, consultas APS e família</span>
             </span>
           </Link>
           <Link

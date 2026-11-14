@@ -65,7 +65,7 @@ export function useToggleChallengeLog() {
       return !done;
     },
     onSuccess: (nowDone) => {
-      if (nowDone) toast.success(`+${POINTS.challenge} pontos de cuidado`);
+      if (nowDone) toast.success("Desafio concluído com sucesso!");
       qc.invalidateQueries({ queryKey: ["challenge-logs", user.id] });
     },
     onError: () => toast.error("Não foi possível salvar. Tente de novo."),

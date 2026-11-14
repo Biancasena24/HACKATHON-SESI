@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { BodyMap } from "@/components/viva/BodyMap";
 import { ensureJourney, useJourney } from "@/hooks/use-journey";
-import { POINTS } from "@/lib/viva/gamification";
 import { BODY_AREAS } from "@/lib/viva/content";
 import { cn } from "@/lib/utils";
 
@@ -17,9 +16,9 @@ export const Route = createFileRoute("/_authenticated/_shell/checkin")({
   head: () => ({
     meta: [
       { title: "Check-in do dia — VIVA+" },
-      { name: "description", content: "Registre em 10 segundos como estão seu humor, energia, sono, estresse e corpo." },
+      { name: "description", content: "Registre em 10 segundos como estão seu sono, estresse e corpo." },
       { property: "og:title", content: "Check-in do dia — VIVA+" },
-      { property: "og:description", content: "Check-in emocional de 10 segundos." },
+      { property: "og:description", content: "Check-in de 10 segundos." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -27,14 +26,8 @@ export const Route = createFileRoute("/_authenticated/_shell/checkin")({
   component: CheckinPage,
 });
 
-type Key = "mood" | "energy" | "sleep" | "stress";
+type Key = "sleep" | "stress";
 const SCALES: { key: Key; q: string; options: { emoji: string; label: string }[] }[] = [
-  { key: "mood", q: "Como está seu humor?", options: [
-    { emoji: "😣", label: "Muito difícil" }, { emoji: "😕", label: "Difícil" }, { emoji: "😐", label: "Ok" }, { emoji: "🙂", label: "Bem" }, { emoji: "😄", label: "Muito bem" },
-  ] },
-  { key: "energy", q: "E sua energia?", options: [
-    { emoji: "🪫", label: "Sem energia" }, { emoji: "🥱", label: "Baixa" }, { emoji: "🙂", label: "Média" }, { emoji: "💪", label: "Boa" }, { emoji: "⚡", label: "Muita" },
-  ] },
   { key: "sleep", q: "Como foi seu sono?", options: [
     { emoji: "😫", label: "Péssimo" }, { emoji: "😴", label: "Ruim" }, { emoji: "😐", label: "Regular" }, { emoji: "😌", label: "Bom" }, { emoji: "🌙", label: "Ótimo" },
   ] },
@@ -48,7 +41,7 @@ function CheckinPage() {
   const qc = useQueryClient();
   const existing = j.todayCheckin;
   const [vals, setVals] = useState<Partial<Record<Key, number>>>(
-    existing ? { mood: existing.mood, energy: existing.energy, sleep: existing.sleep, stress: existing.stress } : {},
+    existing ? { sleep: existing.sleep, stress: existing.stress } : {},
   );
   const [areas, setAreas] = useState<string[]>(existing?.body_areas ?? []);
   const [note, setNote] = useState(existing?.note ?? "");
@@ -63,8 +56,8 @@ function CheckinPage() {
       {
         user_id: j.user.id,
         day: j.today,
-        mood: vals.mood!,
-        energy: vals.energy!,
+        mood: existing?.mood ?? 3,
+        energy: existing?.energy ?? 3,
         sleep: vals.sleep!,
         stress: vals.stress!,
         body_areas: areas,
@@ -75,12 +68,12 @@ function CheckinPage() {
     setBusy(false);
     if (error) { toast.error("Não conseguimos salvar. Tente de novo."); return; }
     await qc.invalidateQueries({ queryKey: ["checkins", j.user.id] });
-    if (!existing) toast.success(`+${POINTS.checkin} pontos de cuidado`);
+    if (!existing) toast.success("Check-in registrado com sucesso!");
     setSaved(true);
   }
 
   if (saved) {
-    const tough = (vals.stress ?? 0) >= 4 || (vals.mood ?? 5) <= 2;
+    const tough = (vals.stress ?? 0) >= 4;
     const nudges = BODY_AREAS.filter((b) => areas.includes(b.id));
     return (
       <div className="mx-auto max-w-xl space-y-5 animate-rise">
