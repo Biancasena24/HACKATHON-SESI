@@ -135,9 +135,7 @@ function Dashboard() {
                 <Smile className="size-4" aria-hidden /> Check-in de hoje
               </span>
               <h2 className="mt-3 text-2xl font-extrabold">Como você está hoje?</h2>
-              <p className="mt-1 text-white/80">
-                Sono, estresse e corpo. Rápido, leve e só seu.
-              </p>
+              <p className="mt-1 text-white/80">Sono, estresse e corpo. Rápido, leve e só seu.</p>
             </div>
             <Button asChild variant="sun" size="lg" className="shrink-0">
               <Link to="/checkin">
@@ -167,9 +165,7 @@ function Dashboard() {
           <p className="mt-4 text-xs font-bold uppercase tracking-wider text-primary/70">
             Consultas APS
           </p>
-          <p className="font-display text-2xl font-extrabold text-primary">
-            4 atendimentos
-          </p>
+          <p className="font-display text-2xl font-extrabold text-primary">4 atendimentos</p>
           <p className="text-sm font-semibold text-muted-foreground">
             Último: Consulta médica na UBS
           </p>
@@ -267,9 +263,7 @@ function Dashboard() {
                   challenge={c}
                   done={j.doneToday.has(c.id)}
                   disabled={toggle.isPending}
-                  onToggle={() =>
-                    toggle.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })
-                  }
+                  onToggle={() => toggle.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })}
                 />
               ))
             )}
