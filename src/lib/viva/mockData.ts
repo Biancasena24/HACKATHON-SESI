@@ -1,4 +1,6 @@
 import type { HealthProfile } from "./types";
+import { daysAgoStr } from "./dates";
+import type { Checkin } from "./queries";
 
 export const healthProfile: HealthProfile = {
   id: "profile-maria",
@@ -314,3 +316,37 @@ export const stealthInsights: StealthInsight[] = [
 ];
 
 export const lastStealthCheck = "Hoje, às 6h40";
+
+export function getMockCheckins(userId: string = "demo"): Checkin[] {
+  const values = [
+    { sleep: 3, mood: 4, energy: 3, stress: 2 },
+    { sleep: 4, mood: 3, energy: 4, stress: 3 },
+    { sleep: 3, mood: 4, energy: 3, stress: 2 },
+    { sleep: 4, mood: 4, energy: 4, stress: 2 },
+    { sleep: 5, mood: 5, energy: 4, stress: 1 },
+    { sleep: 4, mood: 4, energy: 4, stress: 2 },
+    { sleep: 3, mood: 3, energy: 3, stress: 3 },
+    { sleep: 4, mood: 4, energy: 4, stress: 2 },
+    { sleep: 4, mood: 4, energy: 3, stress: 2 },
+    { sleep: 5, mood: 5, energy: 5, stress: 1 },
+    { sleep: 4, mood: 4, energy: 4, stress: 2 },
+    { sleep: 3, mood: 4, energy: 3, stress: 2 },
+    { sleep: 4, mood: 4, energy: 4, stress: 2 },
+    { sleep: 5, mood: 5, energy: 4, stress: 1 },
+  ];
+  return values.map((v, i) => {
+    const day = daysAgoStr(13 - i);
+    return {
+      id: `mock-checkin-${i}`,
+      user_id: userId,
+      day,
+      created_at: new Date().toISOString(),
+      sleep: v.sleep,
+      mood: v.mood,
+      energy: v.energy,
+      stress: v.stress,
+      body_areas: [],
+      note: null,
+    };
+  });
+}

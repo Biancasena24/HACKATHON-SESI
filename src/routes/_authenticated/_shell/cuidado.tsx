@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import {
   CalendarCheck,
@@ -20,20 +20,19 @@ import {
   useToggleChallengeLog,
   useToggleJoin,
 } from "@/hooks/use-journey";
-import ubs from "@/assets/ubs-illustration.jpg";
 
 export const Route = createFileRoute("/_authenticated/_shell/cuidado")({
   loader: ({ context }) => ensureJourney(context.queryClient, context.user.id),
   head: () => ({
     meta: [
-      { title: "Conexão com o SUS — VIVA+" },
+      { title: "Atenção Primária à Saúde (APS) — Cuidaê+" },
       {
         name: "description",
         content:
-          "Encontre sua Unidade Básica de Saúde, veja vacinas e cuidados preventivos e mantenha o acompanhamento em dia.",
+          "Encontre sua Unidade Básica de Saúde, veja vacinas e acompanhe seus cuidados na Atenção Primária.",
       },
-      { property: "og:title", content: "Conexão com o SUS — VIVA+" },
-      { property: "og:description", content: "Sua ponte com a Atenção Primária à Saúde." },
+      { property: "og:title", content: "Atenção Primária à Saúde (APS) — Cuidaê+" },
+      { property: "og:description", content: "Sua ponte com a Atenção Primária à Saúde (APS) e Unidades Básicas de Saúde." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -72,8 +71,33 @@ function Care() {
   const [cep, setCep] = useState("");
   const [place, setPlace] = useState<Place | null>(null);
   const [loading, setLoading] = useState(false);
+  const [coords, setCoords] = useState<{ lat: number; lng: number }>({
+    lat: -23.55052,
+    lng: -46.633308,
+  });
+  const [hasUserLocation, setHasUserLocation] = useState(false);
+  const [geoLoading, setGeoLoading] = useState(false);
+
   const joinedPrevention = j.myChallengeIds.includes("exames");
   const preventionDone = j.logs.some((l) => l.challenge_id === "exames");
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && "geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setCoords({
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+          });
+          setHasUserLocation(true);
+        },
+        () => {
+          // Fallback location kept
+        },
+        { timeout: 7000 },
+      );
+    }
+  }, []);
 
   async function lookup(e: FormEvent) {
     e.preventDefault();
@@ -96,46 +120,56 @@ function Care() {
     }
   }
 
-  function nearMe() {
-    if (!navigator.geolocation) {
+  function requestLocation(openExternal = false) {
+    if (typeof window === "undefined" || !navigator.geolocation) {
       toast.error("Seu aparelho não permite localização.");
       return;
     }
+    setGeoLoading(true);
     navigator.geolocation.getCurrentPosition(
-      (pos) =>
-        window.open(
-          `https://www.google.com/maps/search/UBS/@${pos.coords.latitude},${pos.coords.longitude},15z`,
-          "_blank",
-          "noreferrer",
-        ),
-      () => toast.error("Não foi possível usar sua localização. Tente pelo CEP."),
+      (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        setCoords({ lat, lng });
+        setHasUserLocation(true);
+        setGeoLoading(false);
+        toast.success("Localização atualizada com sucesso!");
+        if (openExternal) {
+          window.open(
+            `https://www.google.com/maps/search/UBS/@${lat},${lng},15z`,
+            "_blank",
+            "noreferrer",
+          );
+        }
+      },
+      () => {
+        setGeoLoading(false);
+        toast.error("Não foi possível obter sua localização exata.");
+        if (openExternal) {
+          window.open("https://www.google.com/maps/search/UBS", "_blank", "noreferrer");
+        }
+      },
+      { timeout: 10000, enableHighAccuracy: true },
     );
+  }
+
+  function nearMe() {
+    requestLocation(true);
   }
 
   return (
     <div className="space-y-6">
-      <section className="grid items-center gap-6 overflow-hidden rounded-3xl bg-sky-soft md:grid-cols-[1fr_1fr]">
-        <div className="p-6 md:p-8">
-          <p className="text-xs font-bold uppercase tracking-wider text-sky">
-            Atenção Primária à Saúde
-          </p>
-          <h1 className="mt-1 text-3xl font-extrabold text-primary md:text-4xl">
-            Sua UBS é sua parceira de cuidado
-          </h1>
-          <p className="mt-2 text-foreground/80">
-            A Unidade Básica de Saúde é a porta de entrada do SUS: prevenção, vacinas, consultas e
-            acolhimento perto de você — e de graça.
-          </p>
-        </div>
-        <img
-          src={ubs}
-          alt="Profissional de saúde recebendo um trabalhador na porta de uma Unidade Básica de Saúde"
-          width={1024}
-          height={768}
-          loading="lazy"
-          className="h-full w-full object-cover"
-        />
-      </section>
+      <header className="space-y-1">
+        <p className="text-xs font-bold uppercase tracking-wider text-sky">
+          Atenção Primária à Saúde
+        </p>
+        <h1 className="text-3xl font-extrabold text-primary md:text-4xl">
+          APS — Conexão com sua UBS
+        </h1>
+        <p className="text-sm text-muted-foreground">
+          Encontre sua Unidade Básica de Saúde de referência, veja vacinas e acompanhe seus cuidados preventivos.
+        </p>
+      </header>
 
       <section className="card-surface p-5">
         <h2 className="flex items-center gap-2 text-xl font-bold text-primary">
@@ -157,8 +191,8 @@ function Care() {
           <Button type="submit" size="lg" disabled={loading}>
             <Search /> {loading ? "Buscando..." : "Buscar"}
           </Button>
-          <Button type="button" size="lg" variant="outline" onClick={nearMe}>
-            <LocateFixed /> Perto de mim
+          <Button type="button" size="lg" variant="outline" onClick={nearMe} disabled={geoLoading}>
+            <LocateFixed /> {geoLoading ? "Obtendo GPS..." : "Perto de mim"}
           </Button>
         </form>
         {place && (
@@ -189,6 +223,62 @@ function Care() {
             </div>
           </div>
         )}
+      </section>
+
+      <section className="card-surface space-y-3 p-5">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="grid size-9 place-items-center rounded-xl bg-sky-soft text-primary">
+              <MapPin className="size-5" />
+            </span>
+            <div>
+              <h2 className="text-lg font-bold text-primary">Sua localização no mapa</h2>
+              <p className="text-xs text-muted-foreground">
+                {hasUserLocation
+                  ? "Localização atual identificada via GPS"
+                  : "Localização de referência (clique em 'Usar meu GPS' para atualizar)"}
+              </p>
+            </div>
+          </div>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            onClick={() => requestLocation(false)}
+            disabled={geoLoading}
+            className="gap-1.5"
+          >
+            <LocateFixed className="size-4" />
+            {geoLoading ? "Obtendo GPS..." : "Usar meu GPS"}
+          </Button>
+        </div>
+
+        <div className="relative overflow-hidden rounded-2xl border border-border shadow-xs">
+          <iframe
+            title="Mapa da sua localização e UBS próximas"
+            width="100%"
+            height="340"
+            className="w-full border-0"
+            loading="lazy"
+            src={`https://www.openstreetmap.org/export/embed.html?bbox=${coords.lng - 0.015}%2C${coords.lat - 0.015}%2C${coords.lng + 0.015}%2C${coords.lat + 0.015}&layer=mapnik&marker=${coords.lat}%2C${coords.lng}`}
+          />
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1.5">
+            <span className="size-2.5 rounded-full bg-sky animate-pulse" />
+            Marcador indica sua posição aproximada
+          </span>
+          <Button asChild size="sm" variant="sky">
+            <a
+              href={`https://www.google.com/maps/search/UBS/@${coords.lat},${coords.lng},15z`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Ver UBSs próximas no Google Maps <ExternalLink className="ml-1 size-3.5" />
+            </a>
+          </Button>
+        </div>
       </section>
 
       <div className="grid gap-6 md:grid-cols-2">

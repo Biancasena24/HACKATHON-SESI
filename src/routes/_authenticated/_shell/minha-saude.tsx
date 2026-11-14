@@ -52,12 +52,12 @@ function MyHealth() {
           ))}
         </nav>
 
-        {/* Linha de aviso de poupança preventiva */}
-        <div className="flex items-center gap-3 rounded-2xl border border-mint/40 bg-mint-soft/80 px-4 py-3 text-secondary-foreground shadow-xs">
-          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
+        {/* Linha de aviso de poupança preventiva e impacto em exames */}
+        <div className="flex items-center gap-3.5 rounded-2xl border border-mint/50 bg-mint-soft/80 p-4 text-secondary-foreground shadow-xs">
+          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
             <PiggyBank className="size-5" aria-hidden />
           </span>
-          <p className="text-sm font-semibold">
+          <p className="text-sm font-semibold leading-relaxed">
             Você economiza até{" "}
             <strong className="font-extrabold text-primary">
               R${" "}
@@ -66,7 +66,9 @@ function MyHealth() {
                 maximumFractionDigits: 2,
               }) ?? "1.240,00"}
             </strong>{" "}
-            por se cuidar.
+            por se cuidar — sabia que um exame como colonoscopia pode custar até{" "}
+            <strong className="font-extrabold text-primary">R$ 2.800,00</strong> se a prevenção for
+            deixada de lado?
           </p>
         </div>
       </header>
@@ -88,7 +90,7 @@ function MyHealth() {
           to="/cuidado"
           className="inline-flex h-14 shrink-0 items-center justify-center gap-2 rounded-2xl bg-sun px-6 font-bold text-sun-foreground shadow-soft transition-colors hover:brightness-105"
         >
-          Ir para o SUS <ArrowRight className="size-5" aria-hidden />
+          Ir para a APS <ArrowRight className="size-5" aria-hidden />
         </Link>
       </section>
     </div>

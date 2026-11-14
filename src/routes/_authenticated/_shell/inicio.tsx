@@ -28,7 +28,7 @@ import { CareSupportCard } from "@/components/viva/CareSupportCard";
 import { ensureJourney, useJourney, useToggleChallengeLog } from "@/hooks/use-journey";
 import { getChallenge, type WorkMode } from "@/lib/viva/challenges";
 import { BODY_AREAS, CAMPAIGN, MODE_TIPS } from "@/lib/viva/content";
-import { healthProfile } from "@/lib/viva/mockData";
+import { getMockCheckins, healthProfile } from "@/lib/viva/mockData";
 import { recommendationsFor, type HealthAnswers } from "@/lib/viva/questionnaire";
 import { cn } from "@/lib/utils";
 
@@ -78,6 +78,12 @@ function Dashboard() {
     (CAMPAIGN.collectiveGoal.current / CAMPAIGN.collectiveGoal.target) * 100,
   );
 
+  const mockCheckins = getMockCheckins(j.user.id);
+  const checkinMap = new Map<string, (typeof mockCheckins)[number]>();
+  for (const m of mockCheckins) checkinMap.set(m.day, m);
+  for (const c of j.checkins) checkinMap.set(c.day, c);
+  const displayCheckins = Array.from(checkinMap.values()).sort((a, b) => a.day.localeCompare(b.day));
+
   return (
     <div className="space-y-6 md:space-y-8">
       {/* Cabeçalho */}
@@ -90,12 +96,12 @@ function Dashboard() {
         </div>
       </section>
 
-      {/* Linha de aviso de poupança preventiva */}
-      <div className="flex items-center gap-3 rounded-2xl border border-mint/40 bg-mint-soft/80 px-4 py-3 text-secondary-foreground shadow-xs">
-        <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
+      {/* Economia preventiva e impacto no custo de exames */}
+      <section className="flex items-center gap-3.5 rounded-2xl border border-mint/50 bg-mint-soft/80 p-4 text-secondary-foreground shadow-xs">
+        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
           <PiggyBank className="size-5" aria-hidden />
         </span>
-        <p className="text-sm font-semibold">
+        <p className="text-sm font-semibold leading-relaxed">
           Você economiza até{" "}
           <strong className="font-extrabold text-primary">
             R${" "}
@@ -104,23 +110,10 @@ function Dashboard() {
               maximumFractionDigits: 2,
             }) ?? "1.240,00"}
           </strong>{" "}
-          por se cuidar.
+          por se cuidar — sabia que um exame como colonoscopia pode custar até{" "}
+          <strong className="font-extrabold text-primary">R$ 2.800,00</strong> se a prevenção for
+          deixada de lado?
         </p>
-      </div>
-
-      {/* Card pequeno de curiosidades sobre custo de exames */}
-      <section className="flex items-start gap-3 rounded-2xl border border-amber-500/25 bg-amber-500/10 p-3.5 text-amber-950 dark:text-amber-200">
-        <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-amber-500/20 text-amber-700 dark:text-amber-300">
-          <Sparkles className="size-4" aria-hidden />
-        </span>
-        <div className="min-w-0 flex-1">
-          <p className="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
-            Você sabia?
-          </p>
-          <p className="mt-0.5 text-sm font-bold text-foreground">
-            Um exame de colonoscopia pode custar até R$ 2.800,00 se você não se cuidar!
-          </p>
-        </div>
       </section>
 
       {j.careSupport && <CareSupportCard />}
@@ -338,15 +331,9 @@ function Dashboard() {
             </span>
           </div>
         </div>
-        {j.checkins.length === 0 ? (
-          <p className="mt-6 rounded-2xl bg-muted p-6 text-center text-muted-foreground">
-            Seu gráfico aparece aqui depois dos primeiros check-ins.
-          </p>
-        ) : (
-          <div className="mt-4">
-            <WellbeingChart checkins={j.checkins} />
-          </div>
-        )}
+        <div className="mt-4">
+          <WellbeingChart checkins={displayCheckins} />
+        </div>
       </section>
 
       {/* Recomendações */}

@@ -52,7 +52,7 @@ const MORE_NAV = [
     icon: HeartPulse,
     tone: "bg-mint-soft text-secondary-foreground",
   },
-  { to: "/cuidado", label: "SUS", icon: Stethoscope, tone: "bg-peach text-brick" },
+  { to: "/cuidado", label: "APS", icon: Stethoscope, tone: "bg-peach text-brick" },
   { to: "/perfil", label: "Meu perfil", icon: UserRound, tone: "bg-pink-soft text-brick" },
 ] as const;
 
@@ -63,7 +63,7 @@ const DESKTOP_NAV = [
   { to: "/comunidades", label: "Comunidade" },
   { to: "/minha-saude", label: "Minha saúde" },
   { to: "/bem-estar", label: "Bem-estar" },
-  { to: "/cuidado", label: "SUS" },
+  { to: "/cuidado", label: "APS" },
 ] as const;
 
 function Shell() {
