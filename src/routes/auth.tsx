@@ -19,9 +19,9 @@ export const Route = createFileRoute("/auth")({
   }),
   head: () => ({
     meta: [
-      { title: "Entrar ou criar conta — VIVA+" },
-      { name: "description", content: "Acesse sua jornada de autocuidado no VIVA+." },
-      { property: "og:title", content: "Entrar no VIVA+" },
+      { title: "Entrar ou criar conta — Cuidaê+" },
+      { name: "description", content: "Acesse sua jornada de autocuidado no Cuidaê+." },
+      { property: "og:title", content: "Entrar no Cuidaê+" },
       { property: "og:description", content: "Acesse sua jornada de autocuidado." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -84,14 +84,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "VIVA+ — autocuidado no trabalho, conectado ao SUS" },
+      { title: "Cuidaê+ — autocuidado no trabalho, conectado ao SUS" },
       {
         name: "description",
         content:
-          "VIVA+ transforma pequenos cuidados diários em hábito, conectando trabalhadores, empresas e a Atenção Primária à Saúde.",
+          "Cuidaê+ transforma pequenos cuidados diários em hábito, conectando trabalhadores, empresas e a Atenção Primária à Saúde.",
       },
       { name: "theme-color", content: "#323581" },
-      { property: "og:title", content: "VIVA+ — autocuidado no trabalho" },
+      { property: "og:title", content: "Cuidaê+ — autocuidado no trabalho" },
       { property: "og:description", content: "Pequenos cuidados, todo dia. Do trabalho ao SUS." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

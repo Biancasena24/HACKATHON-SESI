@@ -26,12 +26,12 @@ export const Route = createFileRoute("/_authenticated/_shell/perfil")({
   loader: ({ context }) => ensureJourney(context.queryClient, context.user.id),
   head: () => ({
     meta: [
-      { title: "Meu perfil e privacidade — VIVA+" },
+      { title: "Meu perfil e privacidade — Cuidaê+" },
       {
         name: "description",
         content: "Ajuste seu perfil, sua rotina de trabalho e controle seus dados.",
       },
-      { property: "og:title", content: "Meu perfil — VIVA+" },
+      { property: "og:title", content: "Meu perfil — Cuidaê+" },
       { property: "og:description", content: "Perfil e privacidade." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -162,7 +162,7 @@ function ProfilePage() {
             </span>
             <span>
               <span className="block font-bold text-primary">Minha saúde</span>
-              <span className="block text-xs text-muted-foreground">Risco, consultas APS e família</span>
+              <span className="block text-xs text-muted-foreground">Risco e consultas APS</span>
             </span>
           </Link>
           <Link

@@ -4,7 +4,6 @@ import {
   ArrowRight,
   CheckCircle2,
   Eye,
-  HeartHandshake,
   Megaphone,
   PiggyBank,
   Smile,
@@ -38,12 +37,12 @@ export const Route = createFileRoute("/_authenticated/_shell/inicio")({
   loader: ({ context }) => ensureJourney(context.queryClient, context.user.id),
   head: () => ({
     meta: [
-      { title: "Minha jornada — VIVA+" },
+      { title: "Minha jornada — Cuidaê+" },
       {
         name: "description",
-        content: "Seu painel de autocuidado: check-in, desafios do dia e evolução.",
+        content: "Painel de autocuidado: check-in, desafios do dia e evolução.",
       },
-      { property: "og:title", content: "Minha jornada — VIVA+" },
+      { property: "og:title", content: "Minha jornada — Cuidaê+" },
       { property: "og:description", content: "Painel individual de autocuidado." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -61,11 +60,6 @@ const STRESS_LABEL = [
   "Muita pressão",
   "Pressão demais",
 ];
-
-function greeting() {
-  const h = new Date().getHours();
-  return h < 12 ? "Bom dia" : h < 18 ? "Boa tarde" : "Boa noite";
-}
 
 function Dashboard() {
   const j = useJourney();
@@ -87,63 +81,18 @@ function Dashboard() {
 
   return (
     <div className="space-y-6 md:space-y-8">
+      {/* Cabeçalho */}
       <section className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold text-muted-foreground">{greeting()},</p>
+          <p className="text-sm font-semibold text-muted-foreground">Olá,</p>
           <h1 className="text-3xl font-extrabold text-primary md:text-4xl">
             {j.profile?.display_name || "você"}
           </h1>
-          <p className="mt-1 max-w-md text-sm text-muted-foreground">
-            Que bom ter você por aqui cuidando de si.
-          </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <RiskBadge risk={healthProfile.riskClassification} size="sm" />
         </div>
       </section>
-
-      {j.todayCheckin ? (
-        <section className="flex items-center gap-4 rounded-[2rem] bg-mint-soft p-5">
-          <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-card text-success shadow-soft">
-            <CheckCircle2 className="size-7" />
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-muted-foreground">Check-in de hoje feito</p>
-            <p className="text-lg font-extrabold text-primary">
-              Sono: {SLEEP_LABEL[j.todayCheckin.sleep] ?? "Ok"} · Pressão:{" "}
-              {STRESS_LABEL[j.todayCheckin.stress] ?? "Ok"}
-            </p>
-          </div>
-          <Button asChild variant="outline" size="sm" className="bg-card">
-            <Link to="/checkin">Editar</Link>
-          </Button>
-        </section>
-      ) : (
-        <section className="relative overflow-hidden rounded-[2rem] bg-gradient-blue p-6 text-white shadow-lift">
-          <div
-            aria-hidden
-            className="absolute -right-10 -top-12 size-44 rounded-full border-[18px] border-white/10"
-          />
-          <div
-            aria-hidden
-            className="absolute -bottom-14 right-12 size-40 rounded-full bg-mint/25 blur-2xl"
-          />
-          <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="max-w-sm">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wider">
-                <Smile className="size-4" aria-hidden /> Check-in de hoje
-              </span>
-              <h2 className="mt-3 text-2xl font-extrabold">Como você está hoje?</h2>
-              <p className="mt-1 text-white/80">Sono, estresse e corpo. Rápido, leve e só seu.</p>
-            </div>
-            <Button asChild variant="sun" size="lg" className="shrink-0">
-              <Link to="/checkin">
-                Fazer check-in <ArrowRight />
-              </Link>
-            </Button>
-          </div>
-        </section>
-      )}
 
       {/* Linha de aviso de poupança preventiva */}
       <div className="flex items-center gap-3 rounded-2xl border border-mint/40 bg-mint-soft/80 px-4 py-3 text-secondary-foreground shadow-xs">
@@ -151,7 +100,7 @@ function Dashboard() {
           <PiggyBank className="size-5" aria-hidden />
         </span>
         <p className="text-sm font-semibold">
-          Você já economizou{" "}
+          Você economiza até{" "}
           <strong className="font-extrabold text-primary">
             R${" "}
             {healthProfile.insights.savingsValue?.toLocaleString("pt-BR", {
@@ -159,13 +108,29 @@ function Dashboard() {
               maximumFractionDigits: 2,
             }) ?? "1.240,00"}
           </strong>{" "}
-          por se cuidar preventivamente.
+          por se cuidar.
         </p>
       </div>
 
+      {/* Card pequeno de curiosidades sobre custo de exames */}
+      <section className="flex items-start gap-3 rounded-2xl border border-amber-500/25 bg-amber-500/10 p-3.5 text-amber-950 dark:text-amber-200">
+        <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-amber-500/20 text-amber-700 dark:text-amber-300">
+          <Sparkles className="size-4" aria-hidden />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
+            Você sabia?
+          </p>
+          <p className="mt-0.5 text-sm font-bold text-foreground">
+            Um exame de colonoscopia pode custar até R$ 2.800,00 se você não se cuidar!
+          </p>
+        </div>
+      </section>
+
       {j.careSupport && <CareSupportCard />}
 
-      <section className="grid gap-3 md:grid-cols-3" aria-label="Resumo da sua saúde">
+      {/* Cards de resumo (sem a sessão sua família) */}
+      <section className="grid gap-3 md:grid-cols-2" aria-label="Resumo da sua saúde">
         <Link
           to="/minha-saude"
           hash="consultas"
@@ -189,33 +154,9 @@ function Dashboard() {
         </Link>
 
         <CommunityMiniCard gamification={healthProfile.gamification} />
-
-        <Link
-          to="/minha-saude"
-          hash="familia"
-          className="group flex flex-col rounded-[2rem] bg-peach p-5 transition-transform hover:-translate-y-1"
-        >
-          <div className="flex items-start justify-between">
-            <span className="grid size-12 place-items-center rounded-2xl bg-card text-brick shadow-soft">
-              <HeartHandshake className="size-6" aria-hidden />
-            </span>
-            <span className="grid size-8 place-items-center rounded-full bg-brick text-white">
-              <ArrowRight className="size-4" aria-hidden />
-            </span>
-          </div>
-          <p className="mt-4 text-xs font-bold uppercase tracking-wider text-brick/80">
-            Sua família
-          </p>
-          <p className="font-display text-2xl font-extrabold text-foreground">
-            {healthProfile.dependents.length} pessoas
-          </p>
-          <p className="text-sm font-semibold text-muted-foreground">
-            {healthProfile.dependents.filter((d) => d.healthStatus === "Atenção").length} ponto(s)
-            de atenção
-          </p>
-        </Link>
       </section>
 
+      {/* Monitoramento suave */}
       <Link
         to="/minha-saude"
         hash="monitoramento"
@@ -225,13 +166,13 @@ function Dashboard() {
           <Eye className="size-5" aria-hidden />
         </span>
         <span className="text-sm font-semibold text-secondary-foreground">
-          <strong className="block text-primary">A gente está de olho por você</strong>A análise
-          stealth encontrou um cuidado suave para suas costas. Toque para ver.
+          <strong className="block text-primary">A gente está de olho por você</strong>
+          Análise preventiva: sugestão de cuidado para suas costas.
         </span>
         <ArrowRight className="ml-auto size-5 shrink-0 text-primary" aria-hidden />
       </Link>
 
-      {/* Botão de desafios do dia (abre popup sem poluir a tela inicial, com botão embaixo) */}
+      {/* Botão Desafios de hoje (abre popup, com botão embaixo) */}
       <Dialog open={challengesOpen} onOpenChange={setChallengesOpen}>
         <DialogTrigger asChild>
           <button
@@ -250,7 +191,7 @@ function Dashboard() {
                   </span>
                 </div>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Toque para abrir e registrar seus cuidados do dia
+                  Toque para abrir e registrar seus cuidados
                 </p>
               </div>
             </div>
@@ -282,9 +223,7 @@ function Dashboard() {
                   challenge={c}
                   done={j.doneToday.has(c.id)}
                   disabled={toggle.isPending}
-                  onToggle={() =>
-                    toggle.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })
-                  }
+                  onToggle={() => toggle.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })}
                 />
               ))
             )}
@@ -302,11 +241,12 @@ function Dashboard() {
         </DialogContent>
       </Dialog>
 
+      {/* Dicas e Campanha */}
       <div className="grid gap-6 md:grid-cols-2">
         {nudges.length > 0 && (
           <section className="rounded-[2rem] bg-mint-soft p-5">
             <h2 className="flex items-center gap-2 font-extrabold text-primary">
-              <Sparkles className="size-5" aria-hidden /> Um cuidado para hoje
+              <Sparkles className="size-5" aria-hidden /> Cuidado para hoje
             </h2>
             <ul className="mt-2 space-y-2 text-sm text-foreground/85">
               {nudges.slice(0, 2).map((n) => (
@@ -340,6 +280,45 @@ function Dashboard() {
         </section>
       </div>
 
+      {/* Card compacto de Check-in posicionado lá embaixo */}
+      {j.todayCheckin ? (
+        <section className="card-surface flex items-center justify-between gap-3 p-4">
+          <div className="flex items-center gap-3">
+            <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-mint-soft text-success shadow-soft">
+              <CheckCircle2 className="size-5" />
+            </span>
+            <div>
+              <p className="text-sm font-bold text-primary">Check-in de hoje feito</p>
+              <p className="text-xs text-muted-foreground">
+                Sono: {SLEEP_LABEL[j.todayCheckin.sleep] ?? "Ok"} · Pressão:{" "}
+                {STRESS_LABEL[j.todayCheckin.stress] ?? "Ok"}
+              </p>
+            </div>
+          </div>
+          <Button asChild variant="outline" size="sm" className="bg-card">
+            <Link to="/checkin">Editar</Link>
+          </Button>
+        </section>
+      ) : (
+        <section className="card-surface flex items-center justify-between gap-3 p-4">
+          <div className="flex items-center gap-3">
+            <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-sky-soft text-primary shadow-soft">
+              <Smile className="size-5" />
+            </span>
+            <div>
+              <p className="text-sm font-bold text-primary">Check-in diário</p>
+              <p className="text-xs text-muted-foreground">Como estão seu sono e estresse hoje?</p>
+            </div>
+          </div>
+          <Button asChild variant="hero" size="sm" className="shrink-0">
+            <Link to="/checkin">
+              Fazer check-in <ArrowRight className="ml-1 size-3.5" />
+            </Link>
+          </Button>
+        </section>
+      )}
+
+      {/* Gráfico de evolução */}
       <section className="card-surface p-5 md:p-6">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
@@ -372,15 +351,13 @@ function Dashboard() {
         )}
       </section>
 
-      {/* Recomendações (conquistas removidas da tela inicial conforme solicitado) */}
+      {/* Recomendações */}
       <section className="card-surface p-5 md:p-6">
         <h2 className="text-xl font-extrabold text-primary">Recomendações para você</h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {recs.map((r) => (
             <li key={r.title} className="rounded-2xl bg-muted p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-primary/70">
-                {r.area}
-              </p>
+              <p className="text-xs font-bold uppercase tracking-wider text-primary/70">{r.area}</p>
               <p className="font-bold text-primary">{r.title}</p>
               <p className="text-sm text-muted-foreground">{r.text}</p>
             </li>

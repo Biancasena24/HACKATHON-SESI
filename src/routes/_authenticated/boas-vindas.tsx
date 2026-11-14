@@ -16,9 +16,9 @@ export const Route = createFileRoute("/_authenticated/boas-vindas")({
   loader: ({ context }) => context.queryClient.ensureQueryData(profileQuery(context.user.id)),
   head: () => ({
     meta: [
-      { title: "Boas-vindas — VIVA+" },
-      { name: "description", content: "Comece sua jornada de autocuidado no VIVA+." },
-      { property: "og:title", content: "Boas-vindas ao VIVA+" },
+      { title: "Boas-vindas — Cuidaê+" },
+      { name: "description", content: "Comece sua jornada de autocuidado no Cuidaê+." },
+      { property: "og:title", content: "Boas-vindas ao Cuidaê+" },
       { property: "og:description", content: "Início rápido da sua jornada." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -62,7 +62,7 @@ function Onboarding() {
       { onConflict: "user_id,challenge_id", ignoreDuplicates: true },
     );
     await qc.invalidateQueries();
-    toast.success("Tudo pronto! Bem-vindo ao VIVA+.");
+    toast.success("Tudo pronto! Bem-vindo ao Cuidaê+.");
     navigate({ to: "/inicio", replace: true });
   }
 
@@ -83,7 +83,7 @@ function Onboarding() {
             <section>
               <h1 className="text-3xl font-bold text-primary">Olá! Vamos começar pelo seu nome.</h1>
               <p className="mt-2 text-muted-foreground">
-                Informe como prefere ser chamado(a) no VIVA+.
+                Informe como prefere ser chamado(a) no Cuidaê+.
               </p>
               <Input
                 value={name}
@@ -109,7 +109,7 @@ function Onboarding() {
                   Grupos com menos de 10 pessoas não aparecem nos relatórios, para ninguém ser identificado.
                 </li>
                 <li className="card-surface p-4">
-                  O VIVA+ não faz diagnósticos e não substitui profissionais. Quando fizer sentido, indicamos a sua UBS.
+                  O Cuidaê+ não faz diagnósticos e não substitui profissionais. Quando fizer sentido, indicamos a sua UBS.
                 </li>
                 <li className="card-surface p-4">
                   Você pode apagar seus registros a qualquer momento no seu perfil (LGPD).

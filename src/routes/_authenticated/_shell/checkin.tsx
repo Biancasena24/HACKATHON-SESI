@@ -15,9 +15,9 @@ export const Route = createFileRoute("/_authenticated/_shell/checkin")({
   loader: ({ context }) => ensureJourney(context.queryClient, context.user.id),
   head: () => ({
     meta: [
-      { title: "Check-in do dia — VIVA+" },
+      { title: "Check-in do dia — Cuidaê+" },
       { name: "description", content: "Registre em 10 segundos como estão seu sono, estresse e corpo." },
-      { property: "og:title", content: "Check-in do dia — VIVA+" },
+      { property: "og:title", content: "Check-in do dia — Cuidaê+" },
       { property: "og:description", content: "Check-in de 10 segundos." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

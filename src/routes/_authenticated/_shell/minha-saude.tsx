@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, HeartHandshake, PiggyBank, ShieldCheck, Sparkles, Stethoscope } from "lucide-react";
+import { ArrowRight, PiggyBank, ShieldCheck, Sparkles, Stethoscope } from "lucide-react";
 import { ApsConsultationsSection } from "@/components/viva/ApsConsultationsSection";
-import { DependentsSection } from "@/components/viva/DependentsSection";
 import { RiskStatusCard } from "@/components/viva/RiskBadge";
 import { StealthPanel } from "@/components/viva/StealthPanel";
 import { healthProfile } from "@/lib/viva/mockData";
@@ -9,14 +8,14 @@ import { healthProfile } from "@/lib/viva/mockData";
 export const Route = createFileRoute("/_authenticated/_shell/minha-saude")({
   head: () => ({
     meta: [
-      { title: "Minha saúde — VIVA+" },
+      { title: "Minha saúde — Cuidaê+" },
       {
         name: "description",
         content:
-          "Sua classificação de risco, histórico de consultas com APS, cuidados da família e monitoramento preventivo.",
+          "Sua classificação de risco, histórico de consultas com APS e monitoramento preventivo.",
       },
-      { property: "og:title", content: "Minha saúde — VIVA+" },
-      { property: "og:description", content: "Risco, histórico APS e cuidados da família." },
+      { property: "og:title", content: "Minha saúde — Cuidaê+" },
+      { property: "og:description", content: "Risco, histórico APS e cuidados preventivos." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -27,7 +26,6 @@ export const Route = createFileRoute("/_authenticated/_shell/minha-saude")({
 const SECTIONS = [
   { href: "#risco", label: "Meu risco", icon: ShieldCheck },
   { href: "#consultas", label: "Histórico APS", icon: Stethoscope },
-  { href: "#familia", label: "Minha família", icon: HeartHandshake },
   { href: "#monitoramento", label: "Monitoramento", icon: Sparkles },
 ];
 
@@ -41,8 +39,8 @@ function MyHealth() {
           </p>
           <h1 className="text-3xl font-extrabold text-primary md:text-4xl">Minha saúde</h1>
           <p className="mt-1 max-w-2xl text-muted-foreground">
-            Um retrato simples do seu cuidado: o que já está funcionando, seus atendimentos na Atenção
-            Primária (APS), o que merece atenção e o acompanhamento preventivo.
+            Acompanhe seus atendimentos na Atenção Primária (APS), classificação de risco e o
+            monitoramento preventivo.
           </p>
         </div>
         <nav aria-label="Atalhos desta página" className="flex flex-wrap gap-2">
@@ -64,7 +62,7 @@ function MyHealth() {
             <PiggyBank className="size-5" aria-hidden />
           </span>
           <p className="text-sm font-semibold">
-            Você já economizou{" "}
+            Você economiza até{" "}
             <strong className="font-extrabold text-primary">
               R${" "}
               {healthProfile.insights.savingsValue?.toLocaleString("pt-BR", {
@@ -72,7 +70,7 @@ function MyHealth() {
                 maximumFractionDigits: 2,
               }) ?? "1.240,00"}
             </strong>{" "}
-            por se cuidar preventivamente.
+            por se cuidar.
           </p>
         </div>
       </header>
@@ -88,15 +86,13 @@ function MyHealth() {
         <ApsConsultationsSection />
       </div>
 
-      <DependentsSection dependents={healthProfile.dependents} />
-
       <StealthPanel />
 
       <section className="flex flex-col gap-4 rounded-3xl bg-gradient-blue p-6 text-white shadow-lift sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="text-xl font-extrabold">Quer manter tudo em dia?</h2>
           <p className="mt-1 text-sm opacity-90">
-            Encontre sua UBS, veja vacinas e leve seus dependentes com você.
+            Encontre sua UBS, veja vacinas e acompanhe seus cuidados preventivos.
           </p>
         </div>
         <Link
