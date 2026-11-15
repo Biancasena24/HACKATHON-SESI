@@ -65,7 +65,13 @@ const AGENTS = [
   },
 ];
 
-const FEATURES = [
+const FEATURES: {
+  icon: typeof Users;
+  title: string;
+  text: string;
+  tone: string;
+  tag?: string;
+}[] = [
   {
     icon: Users,
     title: "Comunidades que cuidam juntas",
@@ -76,16 +82,8 @@ const FEATURES = [
   {
     icon: PiggyBank,
     title: "Sua poupança em saúde",
-    text: "Relatórios mostram o que você está ganhando: menos idas ao pronto-socorro, menos filas e mais saúde.",
+    text: "Quando você se cuida, você economiza tempo, dinheiro e evita o estresse de pegar longas filas.",
     tone: "bg-success-soft text-primary",
-    tag: "Relatórios",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Visão de dependentes",
-    text: "Acompanhe filhos e cônjuges, receba lembretes de cuidado e use o amor como motivo para se cuidar.",
-    tone: "bg-sun-soft text-accent-foreground",
-    tag: "Família",
   },
   {
     icon: Stethoscope,
@@ -384,7 +382,7 @@ function Landing() {
               </Link>
             </Button>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
             {FEATURES.map((feature) => (
               <article key={feature.title} className="card-interactive group flex gap-4 p-5">
                 <span
@@ -393,10 +391,14 @@ function Landing() {
                   <feature.icon className="size-7" aria-hidden />
                 </span>
                 <div>
-                  <span className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-                    {feature.tag}
-                  </span>
-                  <h3 className="mt-2 text-lg font-extrabold text-primary">{feature.title}</h3>
+                  {feature.tag && (
+                    <span className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                      {feature.tag}
+                    </span>
+                  )}
+                  <h3 className={feature.tag ? "mt-2 text-lg font-extrabold text-primary" : "text-lg font-extrabold text-primary"}>
+                    {feature.title}
+                  </h3>
                   <p className="mt-1 text-sm text-muted-foreground">{feature.text}</p>
                 </div>
               </article>

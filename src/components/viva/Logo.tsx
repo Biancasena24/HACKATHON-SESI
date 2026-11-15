@@ -12,7 +12,7 @@ export function Logo({ className, to = "/" }: { className?: string; to?: "/" | "
       aria-label="Cuidaê+ — início"
     >
       <img
-        src="/logo.jpg"
+        src="/logo.jpg?v=3"
         alt="Logo Cuidaê+"
         className="size-10 rounded-[1.1rem] object-cover shadow-soft transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105"
       />
