@@ -3,7 +3,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   CheckCircle2,
-  Eye,
   Megaphone,
   PiggyBank,
   Smile,
@@ -138,22 +137,6 @@ function Dashboard() {
 
         <CommunityMiniCard gamification={healthProfile.gamification} />
       </section>
-
-      {/* Monitoramento suave */}
-      <Link
-        to="/minha-saude"
-        hash="monitoramento"
-        className="flex items-center gap-3 rounded-[1.5rem] bg-mint-soft px-4 py-3 transition-colors hover:bg-mint/25"
-      >
-        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
-          <Eye className="size-5" aria-hidden />
-        </span>
-        <span className="text-sm font-semibold text-secondary-foreground">
-          <strong className="block text-primary">A gente está de olho por você</strong>
-          Análise preventiva: sugestão de cuidado para suas costas.
-        </span>
-        <ArrowRight className="ml-auto size-5 shrink-0 text-primary" aria-hidden />
-      </Link>
 
       {/* Dicas e Campanha */}
       <div className="grid gap-6 md:grid-cols-2">

@@ -10,7 +10,6 @@ import {
   ShieldCheck,
   Smartphone,
   Syringe,
-  BellRing,
   Phone,
   AlertCircle,
 } from "lucide-react";
@@ -353,42 +352,23 @@ function Care() {
         </div>
       </section>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <section className="card-surface p-5">
-          <h2 className="flex items-center gap-2 text-xl font-bold text-primary">
-            <Smartphone className="size-5 text-sky" /> Meu SUS Digital
-          </h2>
-          <p className="mt-1 text-muted-foreground">
-            App oficial do Ministério da Saúde para ver vacinas, exames e seu histórico no SUS.
-          </p>
-          <Button asChild variant="outline" className="mt-4">
-            <a
-              href="https://www.gov.br/saude/pt-br/composicao/seidigi/meu-sus-digital"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Conhecer o app <ExternalLink />
-            </a>
-          </Button>
-        </section>
-        <section className="rounded-3xl border-2 border-primary/30 bg-secondary p-5">
-          <span className="rounded-full bg-primary px-2.5 py-1 text-xs font-bold text-primary-foreground">
-            Ativo
-          </span>
-          <h2 className="mt-2 flex items-center gap-2 text-xl font-bold text-primary">
-            <BellRing className="size-5 text-primary" /> Análise Stealth
-          </h2>
-          <p className="mt-1 text-muted-foreground">
-            Cruzamos consultas, exames, saúde bucal e riscos do trabalho para avisar você com
-            carinho antes que algo vire um problema maior.
-          </p>
-          <Button asChild variant="sky" className="mt-4">
-            <Link to="/minha-saude" hash="monitoramento">
-              Ver meu monitoramento
-            </Link>
-          </Button>
-        </section>
-      </div>
+      <section className="card-surface p-5">
+        <h2 className="flex items-center gap-2 text-xl font-bold text-primary">
+          <Smartphone className="size-5 text-sky" /> Meu SUS Digital
+        </h2>
+        <p className="mt-1 text-muted-foreground">
+          App oficial do Ministério da Saúde para ver vacinas, exames e seu histórico no SUS.
+        </p>
+        <Button asChild variant="outline" className="mt-4">
+          <a
+            href="https://www.gov.br/saude/pt-br/composicao/seidigi/meu-sus-digital"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Conhecer o app <ExternalLink />
+          </a>
+        </Button>
+      </section>
 
       {/* Onde buscar acolhimento */}
       <section className="rounded-3xl bg-ink p-6 text-ink-foreground">

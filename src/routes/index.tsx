@@ -4,7 +4,6 @@ import {
   ArrowUpRight,
   Building2,
   CheckCircle2,
-  Eye,
   Footprints,
   HeartHandshake,
   HeartPulse,
@@ -89,9 +88,9 @@ const FEATURES = [
     tag: "Família",
   },
   {
-    icon: Eye,
-    title: "Análise Stealth",
-    text: "Um painel discreto cruza consultas, exames e riscos do trabalho para prever cuidados futuros.",
+    icon: Stethoscope,
+    title: "Conexão com a APS",
+    text: "Encontre sua Unidade Básica de Saúde e mantenha vacinas e consultas preventivas em dia.",
     tone: "bg-gradient-blue text-white",
     tag: "Prevenção",
   },
@@ -245,10 +244,10 @@ function Landing() {
 
                   <div className="mt-3 flex items-center gap-2 rounded-[1.25rem] bg-muted p-2.5 text-xs">
                     <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-card text-primary">
-                      <Eye className="size-3.5" aria-hidden />
+                      <Stethoscope className="size-3.5" aria-hidden />
                     </span>
                     <p className="font-semibold text-foreground">
-                      Análise stealth: 1 cuidado suave para suas costas.
+                      Cuidado preventivo: 1 consulta de rotina na UBS recomendada.
                     </p>
                   </div>
 

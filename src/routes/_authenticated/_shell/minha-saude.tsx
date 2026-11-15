@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, PiggyBank, Sparkles, Stethoscope } from "lucide-react";
+import { ArrowRight, PiggyBank } from "lucide-react";
 import { ApsConsultationsSection } from "@/components/viva/ApsConsultationsSection";
-import { StealthPanel } from "@/components/viva/StealthPanel";
 import { healthProfile } from "@/lib/viva/mockData";
 
 export const Route = createFileRoute("/_authenticated/_shell/minha-saude")({
@@ -10,7 +9,7 @@ export const Route = createFileRoute("/_authenticated/_shell/minha-saude")({
       { title: "Minha saúde — Cuidaê+" },
       {
         name: "description",
-        content: "Histórico de consultas com APS e monitoramento preventivo.",
+        content: "Histórico de consultas com APS e cuidados preventivos.",
       },
       { property: "og:title", content: "Minha saúde — Cuidaê+" },
       { property: "og:description", content: "Histórico APS e cuidados preventivos." },
@@ -20,11 +19,6 @@ export const Route = createFileRoute("/_authenticated/_shell/minha-saude")({
   }),
   component: MyHealth,
 });
-
-const SECTIONS = [
-  { href: "#consultas", label: "Histórico APS", icon: Stethoscope },
-  { href: "#monitoramento", label: "Monitoramento", icon: Sparkles },
-];
 
 function MyHealth() {
   return (
@@ -36,21 +30,9 @@ function MyHealth() {
           </p>
           <h1 className="text-3xl font-extrabold text-primary md:text-4xl">Minha saúde</h1>
           <p className="mt-1 max-w-2xl text-muted-foreground">
-            Acompanhe seus atendimentos na Atenção Primária (APS) e o monitoramento preventivo.
+            Acompanhe seus atendimentos na Atenção Primária (APS) e seus cuidados preventivos.
           </p>
         </div>
-        <nav aria-label="Atalhos desta página" className="flex flex-wrap gap-2">
-          {SECTIONS.map((section) => (
-            <a
-              key={section.href}
-              href={section.href}
-              className="inline-flex h-11 items-center gap-2 rounded-full border-2 border-border bg-card px-4 text-sm font-bold text-blue-deep transition-colors hover:border-blue/40 hover:bg-blue-soft"
-            >
-              <section.icon className="size-4" aria-hidden />
-              {section.label}
-            </a>
-          ))}
-        </nav>
 
         {/* Linha de aviso de poupança preventiva e impacto em exames */}
         <div className="flex items-center gap-3.5 rounded-2xl border border-mint/50 bg-mint-soft/80 p-4 text-secondary-foreground shadow-xs">
@@ -76,8 +58,6 @@ function MyHealth() {
       <div id="consultas" className="scroll-mt-24">
         <ApsConsultationsSection />
       </div>
-
-      <StealthPanel />
 
       <section className="flex flex-col gap-4 rounded-3xl bg-gradient-blue p-6 text-white shadow-lift sm:flex-row sm:items-center sm:justify-between">
         <div>

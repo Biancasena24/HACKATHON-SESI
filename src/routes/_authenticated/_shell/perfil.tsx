@@ -75,6 +75,7 @@ function ProfilePage() {
   }
 
   async function signOut() {
+    localStorage.removeItem("cuidae_jurado_colaborador");
     await qc.cancelQueries();
     qc.clear();
     await supabase.auth.signOut();
