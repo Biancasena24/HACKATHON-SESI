@@ -8,6 +8,7 @@ import {
   HeartHandshake,
   HeartPulse,
   Home,
+  LayoutGrid,
   Lock,
   PiggyBank,
   ShieldCheck,
@@ -16,7 +17,6 @@ import {
   Stethoscope,
   TrendingUp,
   Trophy,
-  UserRound,
   Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -181,80 +181,99 @@ function Landing() {
                 className="absolute -inset-8 rounded-[3rem] bg-gradient-blue opacity-10 blur-3xl"
               />
               <div className="relative rounded-[2.6rem] border-[10px] border-white bg-white/85 p-1 shadow-lift backdrop-blur">
-                <div className="relative overflow-hidden rounded-[2rem] bg-card px-4 pb-3 pt-6">
+                <div className="relative overflow-hidden rounded-[2rem] bg-hero px-4 pb-3 pt-6">
                   <div
                     aria-hidden
                     className="absolute left-1/2 top-2 h-1.5 w-16 -translate-x-1/2 rounded-full bg-foreground/10"
                   />
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2.5">
-                      <span className="grid size-11 place-items-center rounded-2xl bg-gradient-blue font-display text-base font-extrabold text-white shadow-blue">
-                        MO
-                      </span>
-                      <div>
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-primary/60">
-                          Bom dia, Maria
-                        </p>
-                        <p className="font-display text-base font-extrabold text-primary">
-                          Sua saúde hoje
-                        </p>
-                      </div>
-                    </div>
+                  <div>
+                    <p className="text-xs font-semibold text-muted-foreground">Olá,</p>
+                    <p className="font-display text-2xl font-extrabold text-primary">Avaliador</p>
                   </div>
 
-                  <div className="mt-4 rounded-[1.5rem] bg-gradient-blue p-4 text-white shadow-blue">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className="text-[11px] font-bold uppercase tracking-wider opacity-80">
-                          Poupança em saúde
-                        </p>
-                        <p className="mt-1 font-display text-3xl font-extrabold">R$ 1.240</p>
-                        <p className="text-xs opacity-85">3 idas ao pronto-socorro evitadas</p>
-                      </div>
-                      <span className="grid size-10 place-items-center rounded-xl bg-white/15">
-                        <PiggyBank className="size-5" aria-hidden />
-                      </span>
-                    </div>
-                    <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/20">
-                      <div className="h-full w-[67%] rounded-full bg-mint" />
-                    </div>
-                    <p className="mt-2 text-[11px] font-semibold opacity-80">Meta anual · 67%</p>
-                  </div>
-
-                  <div className="mt-3 grid grid-cols-2 gap-2.5">
-                    <div className="rounded-[1.25rem] bg-mint-soft p-3">
-                      <Trophy className="size-4 text-primary" aria-hidden />
-                      <p className="mt-1 truncate text-[11px] font-bold text-muted-foreground">
-                        {healthProfile.gamification.teamName}
-                      </p>
-                      <p className="font-display text-base font-extrabold text-primary">
-                        {healthProfile.gamification.rank}º lugar
-                      </p>
-                    </div>
-                    <div className="rounded-[1.25rem] bg-peach p-3">
-                      <HeartHandshake className="size-4 text-brick" aria-hidden />
-                      <p className="mt-1 text-[11px] font-bold text-muted-foreground">Família</p>
-                      <p className="font-display text-base font-extrabold text-foreground">
-                        {healthProfile.dependents.length} em cuidado
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-3 flex items-center gap-2 rounded-[1.25rem] bg-muted p-2.5 text-xs">
-                    <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-card text-primary">
-                      <Stethoscope className="size-3.5" aria-hidden />
+                  {/* Aviso de economia preventiva */}
+                  <div className="mt-3 flex items-center gap-3 rounded-2xl border border-mint/50 bg-mint-soft/80 p-3 text-secondary-foreground shadow-xs">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
+                      <PiggyBank className="size-4" aria-hidden />
                     </span>
-                    <p className="font-semibold text-foreground">
-                      Cuidado preventivo: 1 consulta de rotina na UBS recomendada.
+                    <p className="text-[11px] font-semibold leading-snug">
+                      Você economiza por se cuidar — sabia que um exame como colonoscopia pode custar
+                      até <strong className="font-extrabold text-primary">R$ 2.800,00</strong> se a
+                      prevenção for deixada de lado?
                     </p>
                   </div>
 
-                  <div className="mt-4 flex items-center justify-around rounded-full bg-muted px-4 py-2">
-                    <Home className="size-5 text-muted-foreground" aria-hidden />
-                    <span className="grid size-10 place-items-center rounded-full bg-primary text-white shadow-blue">
-                      <Smile className="size-5" aria-hidden />
-                    </span>
-                    <UserRound className="size-5 text-muted-foreground" aria-hidden />
+                  {/* Card Consultas APS */}
+                  <div className="mt-3 rounded-[1.5rem] bg-sky-soft p-4">
+                    <div className="flex items-start justify-between">
+                      <span className="grid size-10 place-items-center rounded-xl bg-card text-primary shadow-soft">
+                        <Stethoscope className="size-5" aria-hidden />
+                      </span>
+                      <span className="grid size-7 place-items-center rounded-full bg-primary text-white">
+                        <ArrowRight className="size-3.5" aria-hidden />
+                      </span>
+                    </div>
+                    <p className="mt-3 text-[10px] font-bold uppercase tracking-wider text-primary/70">
+                      Consultas APS
+                    </p>
+                    <p className="font-display text-xl font-extrabold text-primary">
+                      4 atendimentos
+                    </p>
+                    <p className="text-xs font-semibold text-muted-foreground">
+                      Último: Consulta médica na UBS
+                    </p>
+                  </div>
+
+                  {/* Card Comunidade */}
+                  <div className="mt-3 rounded-[1.5rem] bg-mint-soft p-3.5">
+                    <div className="flex items-center justify-between">
+                      <span className="grid size-9 place-items-center rounded-xl bg-card text-primary shadow-soft">
+                        <Trophy className="size-4" aria-hidden />
+                      </span>
+                      <span className="rounded-full bg-sun px-2.5 py-0.5 text-[10px] font-extrabold text-sun-foreground">
+                        {healthProfile.gamification.rank}º lugar
+                      </span>
+                    </div>
+                    <p className="mt-2 text-[10px] font-bold uppercase tracking-wider text-primary/70">
+                      Comunidade
+                    </p>
+                    <p className="font-display text-base font-extrabold text-primary">
+                      {healthProfile.gamification.teamName}
+                    </p>
+                  </div>
+
+                  {/* Barra de navegação inferior fiel ao app */}
+                  <div className="mt-3 grid grid-cols-5 items-end gap-0.5 rounded-[1.75rem] border border-white/80 bg-card/95 px-2 pb-1.5 pt-2 shadow-soft">
+                    <div className="flex flex-col items-center gap-0.5 text-[9px] font-bold text-primary">
+                      <span className="grid size-7 place-items-center rounded-lg bg-indigo-soft">
+                        <Home className="size-4" aria-hidden />
+                      </span>
+                      Início
+                    </div>
+                    <div className="flex flex-col items-center gap-0.5 whitespace-nowrap text-[9px] font-bold text-muted-foreground">
+                      <span className="grid size-7 place-items-center rounded-lg">
+                        <ShieldCheck className="size-4" aria-hidden />
+                      </span>
+                      Minha saúde
+                    </div>
+                    <div className="flex flex-col items-center gap-0.5 text-[9px] font-bold text-muted-foreground">
+                      <span className="-mt-5 grid size-10 place-items-center rounded-full bg-primary text-white shadow-blue ring-2 ring-background">
+                        <Sparkles className="size-4" aria-hidden />
+                      </span>
+                      Engajamento
+                    </div>
+                    <div className="flex flex-col items-center gap-0.5 text-[9px] font-bold text-muted-foreground">
+                      <span className="grid size-7 place-items-center rounded-lg">
+                        <Stethoscope className="size-4" aria-hidden />
+                      </span>
+                      APS
+                    </div>
+                    <div className="flex flex-col items-center gap-0.5 text-[9px] font-bold text-muted-foreground">
+                      <span className="grid size-7 place-items-center rounded-lg">
+                        <LayoutGrid className="size-4" aria-hidden />
+                      </span>
+                      Mais
+                    </div>
                   </div>
                 </div>
               </div>

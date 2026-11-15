@@ -1,5 +1,4 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { AlertTriangle, Info, Lock, LogOut, ShieldAlert, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -78,18 +77,9 @@ const REPORTED_ISSUES = [
 function Company() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isAuthed = localStorage.getItem("cuidae_empresa_auth");
-      if (!isAuthed) {
-        navigate({ to: "/auth", search: { role: "empresa" }, replace: true });
-      }
-    }
-  }, [navigate]);
-
   function handleLogout() {
     localStorage.removeItem("cuidae_empresa_auth");
-    navigate({ to: "/auth", search: { role: "empresa" }, replace: true });
+    navigate({ to: "/", replace: true });
   }
 
   return (

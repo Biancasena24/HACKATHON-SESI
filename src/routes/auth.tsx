@@ -100,14 +100,23 @@ function AuthPage() {
     return () => data.subscription.unsubscribe();
   }, [navigate, search.redirect, role]);
 
-  function handleJuradoAccess(targetRole: "colaborador" | "empresa") {
+  async function handleJuradoAccess(targetRole: "colaborador" | "empresa") {
     if (targetRole === "empresa") {
       localStorage.setItem("cuidae_empresa_auth", "true");
       toast.success("Acesso como jurado (empresa) ativado!");
       navigate({ to: "/empresa", replace: true });
       return;
     }
-    localStorage.setItem("cuidae_jurado_colaborador", "true");
+    setBusy(true);
+    localStorage.removeItem("cuidae_jurado_colaborador");
+    const { error } = await supabase.auth.signInWithPassword({
+      email: "hackathonsesisaude@gmail.com",
+      password: "Hackathonsesisaude@123456",
+    });
+    setBusy(false);
+    if (error) {
+      localStorage.setItem("cuidae_jurado_colaborador", "true");
+    }
     toast.success("Acesso como jurado (funcionário) ativado!");
     navigate({ to: safePath(search.redirect), replace: true });
   }

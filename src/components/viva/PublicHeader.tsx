@@ -1,11 +1,34 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { useSessionUser } from "@/hooks/use-session-user";
+import { supabase } from "@/integrations/supabase/client";
 
 export function PublicHeader() {
   const user = useSessionUser();
+  const navigate = useNavigate();
+  const [signingIn, setSigningIn] = useState(false);
+
+  async function handleDemoLogin() {
+    if (signingIn) return;
+    setSigningIn(true);
+    localStorage.removeItem("cuidae_jurado_colaborador");
+    const { error } = await supabase.auth.signInWithPassword({
+      email: "hackathonsesisaude@gmail.com",
+      password: "Hackathonsesisaude@123456",
+    });
+    setSigningIn(false);
+    if (error) {
+      toast.error("Não foi possível entrar automaticamente.");
+      navigate({ to: "/auth", search: { mode: "login" } });
+      return;
+    }
+    navigate({ to: "/inicio" });
+  }
+
   return (
     <header className="sticky top-0 z-30 border-b border-white/60 bg-background/70 backdrop-blur-xl">
       <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between gap-3 px-4">
@@ -24,10 +47,15 @@ export function PublicHeader() {
             </Button>
           ) : (
             <>
-              <Button asChild size="sm" variant="ghost" className="rounded-full">
-                <Link to="/auth" search={{ mode: "login" }}>
-                  Entrar
-                </Link>
+              <Button
+                type="button"
+                size="sm"
+                variant="ghost"
+                className="rounded-full cursor-pointer"
+                disabled={signingIn}
+                onClick={handleDemoLogin}
+              >
+                {signingIn ? "Entrando..." : "Entrar"}
               </Button>
               <Button asChild size="sm" variant="default" className="rounded-full shadow-blue">
                 <Link to="/auth" search={{ mode: "signup" }}>
