@@ -130,8 +130,11 @@ function Company() {
             </p>
           </div>
           <p className="flex max-w-sm items-start gap-2 rounded-2xl bg-sky-soft p-3 text-sm text-primary">
-            <Lock className="mt-0.5 size-4 shrink-0" /> Somente dados agregados e anônimos. Grupos
-            com menos de {COMPANY.minGroupSize} pessoas ficam ocultos.
+            <Lock className="mt-0.5 size-4 shrink-0" />
+            <span>
+              <strong className="font-bold">Somente dados agregados e anônimos.</strong> Grupos
+              com menos de {COMPANY.minGroupSize} pessoas ficam ocultos.
+            </span>
           </p>
         </div>
 

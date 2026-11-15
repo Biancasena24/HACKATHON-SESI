@@ -26,11 +26,12 @@ export const MODE_TIPS: Record<WorkMode, { title: string; text: string }[]> = {
 export const BODY_AREAS: { id: string; label: string; nudge: string }[] = [
   { id: "cabeca", label: "Cabeça", nudge: "Faça uma pausa longe das telas e beba um copo de água." },
   { id: "olhos", label: "Olhos", nudge: "Às 15h, experimente a regra 20-20-20: olhe para longe por 20 segundos." },
+  { id: "boca", label: "Dentes e gengiva", nudge: "Dor ou sangramento na gengiva merece atenção: a equipe de Saúde Bucal da UBS pode avaliar." },
   { id: "pescoco", label: "Pescoço", nudge: "Às 15h, um alongamento de 30 segundos: incline a cabeça devagar para cada lado." },
   { id: "ombros", label: "Ombros", nudge: "Gire os ombros para trás 10 vezes, bem devagar." },
+  { id: "peito", label: "Dor no peito", nudge: "Pare a atividade e descanse. Se a dor for forte, persistente ou vier com falta de ar, procure atendimento médico ou ligue 192 (SAMU)." },
   { id: "costas", label: "Lombar", nudge: "Levante a cada hora e caminhe um pouco. Se a dor continuar, procure sua UBS." },
   { id: "maos", label: "Punhos e mãos", nudge: "Abra e feche as mãos e gire os punhos por 30 segundos." },
-  { id: "boca", label: "Dentes e gengiva", nudge: "Dor ou sangramento na gengiva merece atenção: a equipe de Saúde Bucal da UBS pode avaliar." },
   { id: "pernas", label: "Pernas e pés", nudge: "Se ficou muito tempo em pé, eleve as pernas por alguns minutos no descanso." },
 ];
 
