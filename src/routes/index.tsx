@@ -188,7 +188,7 @@ function Landing() {
                   />
                   <div>
                     <p className="text-xs font-semibold text-muted-foreground">Olá,</p>
-                    <p className="font-display text-2xl font-extrabold text-primary">Avaliador</p>
+                    <p className="font-display text-2xl font-extrabold text-primary">Fernanda</p>
                   </div>
 
                   {/* Aviso de economia preventiva */}
@@ -197,8 +197,9 @@ function Landing() {
                       <PiggyBank className="size-4" aria-hidden />
                     </span>
                     <p className="text-[11px] font-semibold leading-snug">
-                      Você economiza por se cuidar — sabia que um exame como colonoscopia pode custar
-                      até <strong className="font-extrabold text-primary">R$ 2.800,00</strong> se a
+                      Você economiza por se cuidar — sabia que um exame como colonoscopia pode
+                      custar até{" "}
+                      <strong className="font-extrabold text-primary">R$ 2.800,00</strong> se a
                       prevenção for deixada de lado?
                     </p>
                   </div>
@@ -415,7 +416,13 @@ function Landing() {
                       {feature.tag}
                     </span>
                   )}
-                  <h3 className={feature.tag ? "mt-2 text-lg font-extrabold text-primary" : "text-lg font-extrabold text-primary"}>
+                  <h3
+                    className={
+                      feature.tag
+                        ? "mt-2 text-lg font-extrabold text-primary"
+                        : "text-lg font-extrabold text-primary"
+                    }
+                  >
                     {feature.title}
                   </h3>
                   <p className="mt-1 text-sm text-muted-foreground">{feature.text}</p>
