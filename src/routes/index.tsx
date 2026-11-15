@@ -405,7 +405,7 @@ function Landing() {
         </section>
 
         <section className="mx-auto max-w-6xl px-4 pb-20">
-          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-primary p-8 text-primary-foreground shadow-lift md:p-12">
+          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-primary p-6 text-primary-foreground shadow-lift sm:p-8 md:p-12">
             <div
               aria-hidden
               className="animate-float absolute -right-10 -top-10 size-56 rounded-full bg-sun-orb opacity-80"
@@ -415,9 +415,10 @@ function Landing() {
               className="absolute -bottom-20 left-1/3 size-64 rounded-full bg-white/10 blur-2xl"
             />
             <div className="relative grid gap-8 md:grid-cols-[1.3fr_1fr] md:items-center">
-              <div>
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-sm font-bold text-white">
-                  <HeartPulse className="size-4" aria-hidden /> Cuidado sem culpa, sem diagnóstico
+              <div className="min-w-0">
+                <span className="inline-flex max-w-full items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-xs font-bold text-white sm:text-sm">
+                  <HeartPulse className="size-4 shrink-0" aria-hidden />
+                  <span className="truncate">Cuidado sem culpa, sem diagnóstico</span>
                 </span>
                 <h2 className="mt-4 text-3xl font-extrabold text-white md:text-4xl">
                   Comece com 10 segundos por dia.
@@ -435,20 +436,30 @@ function Landing() {
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">
                       <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-secondary" aria-hidden />
-                      {item}
+                      <span className="min-w-0 break-words">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="flex flex-col gap-3">
-                <Button asChild variant="sun" size="xl">
+              <div className="flex min-w-0 flex-col gap-3">
+                <Button
+                  asChild
+                  variant="sun"
+                  size="xl"
+                  className="h-auto min-h-13 w-full whitespace-normal px-5 py-3 text-center"
+                >
                   <Link to="/auth" search={{ mode: "signup" }}>
-                    Criar minha conta <ArrowRight />
+                    Criar minha conta <ArrowRight className="shrink-0" />
                   </Link>
                 </Button>
-                <Button asChild variant="glass" size="lg">
+                <Button
+                  asChild
+                  variant="glass"
+                  size="lg"
+                  className="h-auto min-h-12 w-full whitespace-normal px-4 py-3 text-center text-xs sm:text-sm"
+                >
                   <Link to="/empresa">
-                    Ver demonstração para empresas <ArrowUpRight />
+                    Ver demonstração para empresas <ArrowUpRight className="shrink-0" />
                   </Link>
                 </Button>
               </div>

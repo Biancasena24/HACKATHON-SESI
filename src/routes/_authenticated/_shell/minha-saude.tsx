@@ -40,15 +40,7 @@ function MyHealth() {
             <PiggyBank className="size-5" aria-hidden />
           </span>
           <p className="text-sm font-semibold leading-relaxed">
-            Você economiza até{" "}
-            <strong className="font-extrabold text-primary">
-              R${" "}
-              {healthProfile.insights.savingsValue?.toLocaleString("pt-BR", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }) ?? "1.240,00"}
-            </strong>{" "}
-            por se cuidar — sabia que um exame como colonoscopia pode custar até{" "}
+            Você economiza por se cuidar — sabia que um exame como colonoscopia pode custar até{" "}
             <strong className="font-extrabold text-primary">R$ 2.800,00</strong> se a prevenção for
             deixada de lado?
           </p>

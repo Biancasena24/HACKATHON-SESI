@@ -420,21 +420,21 @@ function EngajamentoPage() {
         <TabsList className="grid w-full grid-cols-3 rounded-2xl bg-secondary/80 p-1.5 h-auto">
           <TabsTrigger
             value="checkin"
-            className="rounded-xl py-2.5 text-xs sm:text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-soft"
+            className="gap-1 sm:gap-1.5 rounded-xl px-1.5 sm:px-3 py-2.5 text-xs sm:text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-soft"
           >
-            <Smile className="mr-1.5 size-4" /> Check-in
+            <Smile className="size-4 shrink-0" /> Check-in
           </TabsTrigger>
           <TabsTrigger
             value="desafios"
-            className="rounded-xl py-2.5 text-xs sm:text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-soft"
+            className="gap-1 sm:gap-1.5 rounded-xl px-1.5 sm:px-3 py-2.5 text-xs sm:text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-soft"
           >
-            <Trophy className="mr-1.5 size-4" /> Desafios
+            <Trophy className="size-4 shrink-0" /> Desafios
           </TabsTrigger>
           <TabsTrigger
             value="comunidade"
-            className="rounded-xl py-2.5 text-xs sm:text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-soft"
+            className="gap-1 sm:gap-1.5 rounded-xl px-1.5 sm:px-3 py-2.5 text-xs sm:text-sm font-bold data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-soft"
           >
-            <Users className="mr-1.5 size-4" /> Comunidade
+            <Users className="size-4 shrink-0" /> Comunidade
           </TabsTrigger>
         </TabsList>
 

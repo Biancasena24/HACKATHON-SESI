@@ -139,7 +139,7 @@ export function ApsConsultationsSection() {
                     <Calendar className="size-3.5" aria-hidden />
                     {item.date}
                   </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-success-soft px-2.5 py-0.5 font-bold text-success">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-success px-2.5 py-0.5 font-bold text-success-foreground">
                     <CheckCircle2 className="size-3.5" aria-hidden />
                     {item.status}
                   </span>
@@ -156,7 +156,7 @@ export function ApsConsultationsSection() {
 
                 <div className="rounded-2xl bg-sky-soft/60 p-3.5">
                   <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
-                    <CheckCircle2 className="size-3.5 text-success" aria-hidden /> Conduta e orientações
+                    <CheckCircle2 className="size-3.5 text-secondary-foreground" aria-hidden /> Conduta e orientações
                   </p>
                   <p className="mt-1 leading-relaxed text-foreground/80">{item.conduct}</p>
                 </div>

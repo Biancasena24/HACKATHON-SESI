@@ -183,7 +183,7 @@ function Dashboard() {
         {j.todayCheckin ? (
           <div className="card-surface flex items-center justify-between gap-3 p-3.5">
             <div className="flex items-center gap-2.5 min-w-0">
-              <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-mint-soft text-success">
+              <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-mint-soft text-secondary-foreground">
                 <CheckCircle2 className="size-4" />
               </span>
               <div className="min-w-0">

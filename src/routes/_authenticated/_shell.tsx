@@ -99,13 +99,13 @@ function Shell() {
         className="fixed inset-x-3 bottom-3 z-40 md:hidden"
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
-        <ul className="mx-auto grid max-w-md grid-cols-5 items-end gap-1 rounded-[2rem] border border-white/80 bg-card/90 px-2 pb-2 pt-2 shadow-lift backdrop-blur-xl">
+        <ul className="mx-auto grid max-w-md grid-cols-5 items-end gap-0.5 rounded-[2rem] border border-white/80 bg-card/90 px-2 pb-2 pt-2 shadow-lift backdrop-blur-xl">
           {BOTTOM_NAV.map((item) =>
             item.center ? (
               <li key={item.to} className="flex justify-center">
                 <Link
                   to={item.to}
-                  className="group flex flex-col items-center gap-1 text-[10px] font-bold text-muted-foreground"
+                  className="group flex flex-col items-center justify-end gap-1 whitespace-nowrap text-center text-[10px] font-bold leading-tight text-muted-foreground"
                   activeProps={{ className: "text-primary" }}
                 >
                   <span className="-mt-8 grid size-14 place-items-center rounded-full bg-primary text-white shadow-blue ring-4 ring-background transition-transform group-active:scale-95">
@@ -118,7 +118,7 @@ function Shell() {
               <li key={item.to}>
                 <Link
                   to={item.to}
-                  className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-2xl px-1 py-1.5 text-[10px] font-bold text-muted-foreground"
+                  className="flex min-h-14 flex-col items-center justify-end gap-1 rounded-2xl px-0.5 py-1.5 whitespace-nowrap text-center text-[10px] font-bold leading-tight text-muted-foreground"
                   activeProps={{ className: "text-primary [&_.nav-dot]:bg-indigo-soft" }}
                 >
                   <span className="nav-dot grid size-9 place-items-center rounded-xl transition-colors">
@@ -136,7 +136,7 @@ function Shell() {
                   type="button"
                   aria-label="Abrir mais opções"
                   className={cn(
-                    "flex min-h-14 w-full flex-col items-center justify-center gap-1 rounded-2xl px-1 py-1.5 text-[10px] font-bold",
+                    "flex min-h-14 w-full flex-col items-center justify-end gap-1 rounded-2xl px-0.5 py-1.5 whitespace-nowrap text-center text-[10px] font-bold leading-tight",
                     moreActive ? "bg-indigo-soft text-primary" : "text-muted-foreground",
                   )}
                 >
