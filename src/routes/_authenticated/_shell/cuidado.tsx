@@ -168,9 +168,6 @@ function Care() {
         <h1 className="text-3xl font-extrabold text-primary md:text-4xl">
           APS — Conexão com sua UBS
         </h1>
-        <p className="text-sm text-muted-foreground">
-          Encontre sua Unidade Básica de Saúde de referência, veja vacinas e acompanhe seus cuidados preventivos.
-        </p>
       </header>
 
       <section className="card-surface p-5">
