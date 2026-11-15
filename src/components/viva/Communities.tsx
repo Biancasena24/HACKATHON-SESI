@@ -92,12 +92,8 @@ export function CommunitiesPanel({ gamification }: { gamification: Gamification 
             Gamificação e rede de apoio
           </p>
           <h1 className="mt-1 text-3xl font-extrabold text-primary md:text-4xl">
-            Cuidar junto rende mais
+            Cuide-se junto com a galera do trabalho
           </h1>
-          <p className="mt-2 text-base text-foreground/85">
-            Times da empresa competem de forma amigável pelo melhor engajamento em saúde. Cada
-            check-in e cada desafio concluído soma pontos para o seu grupo.
-          </p>
           <Link
             to="/engajamento"
             search={{ tab: "checkin" }}
@@ -145,12 +141,7 @@ export function CommunitiesPanel({ gamification }: { gamification: Gamification 
 
       <section className="card-surface p-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <h2 className="text-2xl font-extrabold text-primary">Ranking dos times</h2>
-            <p className="text-sm text-muted-foreground">
-              Atualizado hoje. Todos veem apenas a pontuação coletiva dos grupos.
-            </p>
-          </div>
+          <h2 className="text-2xl font-extrabold text-primary">Ranking dos times</h2>
           <span className="rounded-full bg-success-soft px-3 py-1.5 text-sm font-bold text-primary">
             Competição amigável
           </span>

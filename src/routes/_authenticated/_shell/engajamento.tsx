@@ -329,7 +329,7 @@ function ChallengesTab() {
                     log.mutate({ challengeId: c.id, done: j.doneToday.has(c.id) })
                   }
                 />
-                <div className="flex items-center justify-between gap-3 pt-2">
+                <div className="flex flex-wrap items-center justify-between gap-2 pt-2">
                   <div
                     className="flex gap-1.5"
                     aria-label={`${daysDone.size} dias nos últimos 7`}
@@ -351,11 +351,11 @@ function ChallengesTab() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-xs text-muted-foreground hover:text-destructive"
+                    className="h-8 px-2 text-xs text-muted-foreground hover:text-destructive"
                     onClick={() => join.mutate({ challengeId: c.id, joined: true })}
                     disabled={join.isPending}
                   >
-                    <Minus className="mr-1 size-3.5" /> Deixar de seguir
+                    <Minus className="size-3.5 shrink-0" /> Deixar de seguir
                   </Button>
                 </div>
               </div>
