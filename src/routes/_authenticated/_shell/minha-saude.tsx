@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, PiggyBank } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ApsConsultationsSection } from "@/components/viva/ApsConsultationsSection";
-import { healthProfile } from "@/lib/viva/mockData";
 
 export const Route = createFileRoute("/_authenticated/_shell/minha-saude")({
   head: () => ({
@@ -22,29 +21,9 @@ export const Route = createFileRoute("/_authenticated/_shell/minha-saude")({
 
 function MyHealth() {
   return (
-    <div className="space-y-8">
-      <header className="space-y-4">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-wider text-blue">
-            Seus dados, suas escolhas
-          </p>
-          <h1 className="text-3xl font-extrabold text-primary md:text-4xl">Minha saúde</h1>
-          <p className="mt-1 max-w-2xl text-muted-foreground">
-            Acompanhe seus atendimentos na Atenção Primária (APS) e seus cuidados preventivos.
-          </p>
-        </div>
-
-        {/* Linha de aviso de poupança preventiva e impacto em exames */}
-        <div className="flex items-center gap-3.5 rounded-2xl border border-mint/50 bg-mint-soft/80 p-4 text-secondary-foreground shadow-xs">
-          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
-            <PiggyBank className="size-5" aria-hidden />
-          </span>
-          <p className="text-sm font-semibold leading-relaxed">
-            Você economiza por se cuidar — sabia que um exame como colonoscopia pode custar até{" "}
-            <strong className="font-extrabold text-primary">R$ 2.800,00</strong> se a prevenção for
-            deixada de lado?
-          </p>
-        </div>
+    <div className="space-y-6">
+      <header>
+        <h1 className="text-3xl font-extrabold text-primary md:text-4xl">Minha saúde</h1>
       </header>
 
       <div id="consultas" className="scroll-mt-24">
