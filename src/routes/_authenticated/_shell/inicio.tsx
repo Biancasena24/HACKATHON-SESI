@@ -25,10 +25,9 @@ import { CommunityMiniCard } from "@/components/viva/Communities";
 import { WellbeingChart } from "@/components/viva/WellbeingChart";
 import { CareSupportCard } from "@/components/viva/CareSupportCard";
 import { ensureJourney, useJourney, useToggleChallengeLog } from "@/hooks/use-journey";
-import { getChallenge, type WorkMode } from "@/lib/viva/challenges";
-import { BODY_AREAS, CAMPAIGN, MODE_TIPS } from "@/lib/viva/content";
+import { getChallenge } from "@/lib/viva/challenges";
+import { BODY_AREAS, CAMPAIGN } from "@/lib/viva/content";
 import { getMockCheckins, healthProfile } from "@/lib/viva/mockData";
-import { recommendationsFor, type HealthAnswers } from "@/lib/viva/questionnaire";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/_shell/inicio")({
@@ -97,21 +96,36 @@ function Dashboard() {
         </div>
       </section>
 
-      {/* Economia preventiva e impacto no custo de exames */}
-      <section className="flex items-center gap-3.5 rounded-2xl border border-mint/50 bg-mint-soft/80 p-4 text-secondary-foreground shadow-xs">
-        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
-          <PiggyBank className="size-5" aria-hidden />
-        </span>
-        <p className="text-sm font-semibold leading-relaxed">
-          Você economiza por se cuidar — sabia que um exame como colonoscopia pode custar até{" "}
-          <strong className="font-extrabold text-primary">R$ 2.800,00</strong> se a prevenção for
-          deixada de lado?
-        </p>
+      {/* Gráfico de evolução (primeiro bloco) */}
+      <section className="card-surface p-5 md:p-6">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-extrabold text-primary">Sua evolução</h2>
+            <p className="text-sm text-muted-foreground">Últimos 14 dias de check-in</p>
+          </div>
+          <div className="flex gap-3 text-xs font-semibold text-muted-foreground">
+            <span className="flex items-center gap-1">
+              <span className="size-2.5 rounded-full bg-chart-2" />
+              Humor
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="size-2.5 rounded-full bg-chart-3" />
+              Energia
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="size-2.5 rounded-full bg-chart-1" />
+              Sono
+            </span>
+          </div>
+        </div>
+        <div className="mt-4">
+          <WellbeingChart checkins={displayCheckins} />
+        </div>
       </section>
 
       {j.careSupport && <CareSupportCard />}
 
-      {/* Cards de resumo (sem a sessão sua família) */}
+      {/* Cards de resumo: Consultas APS e Comunidade */}
       <section className="grid gap-3 md:grid-cols-2" aria-label="Resumo da sua saúde">
         <Link
           to="/minha-saude"
@@ -136,6 +150,18 @@ function Dashboard() {
         </Link>
 
         <CommunityMiniCard gamification={healthProfile.gamification} />
+      </section>
+
+      {/* Economia preventiva e impacto no custo de exames */}
+      <section className="flex items-center gap-3.5 rounded-2xl border border-mint/50 bg-mint-soft/80 p-4 text-secondary-foreground shadow-xs">
+        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-card text-primary shadow-soft">
+          <PiggyBank className="size-5" aria-hidden />
+        </span>
+        <p className="text-sm font-semibold leading-relaxed">
+          Você economiza por se cuidar — sabia que um exame como colonoscopia pode custar até{" "}
+          <strong className="font-extrabold text-primary">R$ 2.800,00</strong> se a prevenção for
+          deixada de lado?
+        </p>
       </section>
 
       {/* Dicas e Campanha */}
@@ -277,33 +303,6 @@ function Dashboard() {
             </div>
           </DialogContent>
         </Dialog>
-      </section>
-
-      {/* Gráfico de evolução */}
-      <section className="card-surface p-5 md:p-6">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h2 className="text-xl font-extrabold text-primary">Sua evolução</h2>
-            <p className="text-sm text-muted-foreground">Últimos 14 dias de check-in</p>
-          </div>
-          <div className="flex gap-3 text-xs font-semibold text-muted-foreground">
-            <span className="flex items-center gap-1">
-              <span className="size-2.5 rounded-full bg-chart-2" />
-              Humor
-            </span>
-            <span className="flex items-center gap-1">
-              <span className="size-2.5 rounded-full bg-chart-3" />
-              Energia
-            </span>
-            <span className="flex items-center gap-1">
-              <span className="size-2.5 rounded-full bg-chart-1" />
-              Sono
-            </span>
-          </div>
-        </div>
-        <div className="mt-4">
-          <WellbeingChart checkins={displayCheckins} />
-        </div>
       </section>
 
       {/* Recomendações */}
