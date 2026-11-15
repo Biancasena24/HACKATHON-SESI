@@ -63,10 +63,6 @@ function Dashboard() {
   const toggle = useToggleChallengeLog();
   const [challengesOpen, setChallengesOpen] = useState(false);
 
-  const mode = (j.profile?.work_mode ?? "home_office") as WorkMode;
-  const tips = MODE_TIPS[mode] ?? MODE_TIPS.home_office;
-  const tip = tips[new Date().getDate() % tips.length] ?? { title: "", text: "" };
-  const recs = recommendationsFor((j.profile?.health_answers ?? {}) as HealthAnswers);
   const myChallenges = j.myChallengeIds
     .map(getChallenge)
     .filter((c): c is NonNullable<typeof c> => !!c);
@@ -180,13 +176,6 @@ function Dashboard() {
             </ul>
           </section>
         )}
-        <section className="rounded-[2rem] bg-sky-soft p-5">
-          <p className="text-xs font-bold uppercase tracking-wider text-primary/70">
-            Dica para a sua rotina
-          </p>
-          <h2 className="mt-1 text-lg font-extrabold text-primary">{tip.title}</h2>
-          <p className="mt-1 text-sm text-foreground/80">{tip.text}</p>
-        </section>
         <section className={cn("rounded-[2rem] bg-peach p-5", !nudges.length && "md:col-span-2")}>
           <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brick/80">
             <Megaphone className="size-4" aria-hidden /> Campanha da empresa
@@ -303,20 +292,6 @@ function Dashboard() {
             </div>
           </DialogContent>
         </Dialog>
-      </section>
-
-      {/* Recomendações */}
-      <section className="card-surface p-5 md:p-6">
-        <h2 className="text-xl font-extrabold text-primary">Recomendações para você</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          {recs.map((r) => (
-            <li key={r.title} className="rounded-2xl bg-muted p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-primary/70">{r.area}</p>
-              <p className="font-bold text-primary">{r.title}</p>
-              <p className="text-sm text-muted-foreground">{r.text}</p>
-            </li>
-          ))}
-        </ul>
       </section>
     </div>
   );
