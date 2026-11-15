@@ -108,7 +108,7 @@ npm install
 npm run dev
 ```
 
-O projeto estará disponível no endereço indicado pelo terminal (geralmente `http://localhost:3000`).
+O projeto estará disponível no endereço indicado pelo terminal: `http://localhost:8080`.
 
 ---
 
