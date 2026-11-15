@@ -84,6 +84,7 @@ const FEATURES: {
     title: "Sua poupança em saúde",
     text: "Quando você se cuida, você economiza tempo, dinheiro e evita o estresse de pegar longas filas.",
     tone: "bg-success-soft text-primary",
+    tag: "Economia",
   },
   {
     icon: Stethoscope,
